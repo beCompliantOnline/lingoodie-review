@@ -1,0 +1,278 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lingoodie · Slovenian voice shootout</title><style>
+:root{--bg:#0f1216;--card:#1a1f27;--edge:#2a323d;--txt:#e8edf2;--mut:#9aa7b4}
+*{box-sizing:border-box}body{margin:0;font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--txt)}
+header{padding:16px 20px;border-bottom:1px solid var(--edge)}h1{font-size:18px;margin:0 0 4px}.sub{color:var(--mut);font-size:13px}
+main{padding:8px 20px 16px;max-width:940px;margin:0 auto;display:grid;gap:10px}
+h2.lvl{font-size:14px;color:#9db8d6;margin:14px 0 2px;border-bottom:1px solid var(--edge);padding-bottom:4px}
+.card{background:var(--card);border:1px solid var(--edge);border-radius:12px;padding:10px 13px}
+.lrow{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}.seq{background:#22303f;color:#8fb6de;font-size:11px;font-weight:700;border-radius:6px;padding:1px 7px}
+.word{font-weight:600;font-size:19px}.gloss{color:var(--mut);font-size:14px}
+.flagged-note{background:#2a1519;border:1px solid #5a2630;color:#e79aa6;font-size:12px;border-radius:7px;padding:4px 9px;margin:6px 0 0}
+.ab{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.ab-btn{cursor:pointer;border-radius:9px;padding:8px 11px;font-size:12.5px;font-weight:600;border:1px solid var(--edge)}
+.ab-btn.old{background:#20262f;color:#c3ccd6}
+.ab-btn.cand{background:#141d33;color:#a9c7f5;border-color:#28477e}
+.ab-btn.dead{background:#2a1519;color:#e79aa6;cursor:not-allowed}
+.ab-btn.playing{outline:2px solid #4c8bf5;outline-offset:1px}.ab-btn.err{background:#2a1519;color:#e79aa6}
+.cbox{margin-top:8px}.cbox label{display:block;font-size:11px;color:#7f8a97;margin-bottom:3px}
+.cinput{width:100%;background:#0f141a;color:#e8edf2;border:1px solid #2a323d;border-radius:7px;padding:6px 8px;font:13px inherit;resize:vertical}
+.cbox.has .cinput{border-color:#3f7d52;background:#0e150f}
+#tabbar{position:sticky;top:0;z-index:50;background:#12161c;border-bottom:1px solid var(--edge);padding:9px 20px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+#tabbar button{background:#243447;color:#dbe7f5;border:1px solid #33475c;border-radius:8px;padding:6px 14px;cursor:pointer;font-size:13px;font-weight:600}
+#tabbar button.active{background:#c99a2e;border-color:#e0b451;color:#1a1305}
+#tabbar .cnt{color:#9db0c4;font-size:12.5px}
+.sec{display:none}
+body[data-tab="si"] #sec-si{display:grid;gap:10px}
+body[data-tab="en"] #sec-en{display:grid;gap:10px}
+footer{color:var(--mut);font-size:12px;text-align:center;padding:24px}
+</style></head><body data-tab="si">
+<header><h1>Slovenian voice shootout — the pairs you flagged</h1>
+<div class="sub">Slovene has only two native neural voices, so “another voice” = the other one: <b>Petra ♀ ↔ Rok ♂</b>. Each row plays the current clip plus the opposite voice to compare. At the top are the <b>“vi” fixes</b> — it was being read as the number 6; the fixed buttons force the real word. English tab = the clips you flagged for English. Pick per row, then Download comments → send me.</div></header>
+<div id="tabbar">
+ <button id="tsi" class="active">🇸🇮 Slovenian (27)</button>
+ <button id="ten">🇬🇧 English (5)</button>
+ <span class="cnt">One file covers both tabs.</span>
+</div>
+<main id="list">
+<div class="sec" id="sec-si"><h2 class="lvl">“vi” pronunciation fix — 2</h2><div class="card" data-id="si1949">
+<div class="lrow"><span class="seq">#1949</span><span class="flag">🇸🇮</span><span class="word">vi</span><span class="gloss">you</span></div>
+<div class="flagged-note">This one currently reads like “šest” (6) — the fixed buttons force the real word. Tell me which voice + that it’s fixed.</div>
+<div class="ab"><button class="ab-btn old" data-src="https://aquascapehub.com/pronunciation/sl-SI/bfe148189e3a2bcb.mp3?v=slshoot1">▶ Petra ♀ (current, sounds like ‘šest’)</button><button class="ab-btn cand" data-src="https://aquascapehub.com/pronunciation/sl-voicetest/1949_petrafix.mp3">▶ Petra ♀ (fixed)</button><button class="ab-btn cand" data-src="https://aquascapehub.com/pronunciation/sl-voicetest/1949_rokfix.mp3">▶ Rok ♂ (fixed)</button></div>
+<div class="cbox"><label>Which voice? (type the label, or “keep current”)</label><textarea class="cinput cc" data-pid="si1949" rows="1" placeholder="comment…"></textarea></div>
+</div><div class="card" data-id="si1951">
+<div class="lrow"><span class="seq">#1951</span><span class="flag">🇸🇮</span><span class="word">Vi ste tukaj.</span><span class="gloss">You are here.</span></div>
+<div class="flagged-note">This one currently reads like “šest” (6) — the fixed buttons force the real word. Tell me which voice + that it’s fixed.</div>
+<div class="ab"><button class="ab-btn old" data-src="https://aquascapehub.com/pronunciation/sl-SI/4d21c39f0c3e0279.mp3?v=slshoot1">▶ Rok ♂ (current, sounds like ‘šest’)</button><button class="ab-btn cand" data-src="https://aquascapehub.com/pronunciation/sl-voicetest/1951_petrafix.mp3">▶ Petra ♀ (fixed)</button><button class="ab-btn cand" data-src="https://aquascapehub.com/pronunciation/sl-voicetest/1951_rokfix.mp3">▶ Rok ♂ (fixed)</button></div>
+<div class="cbox"><label>Which voice? (type the label, or “keep current”)</label><textarea class="cinput cc" data-pid="si1951" rows="1" placeholder="comment…"></textarea></div>
+</div><h2 class="lvl">Petra ♀ vs Rok ♂ — 25</h2><div class="card" data-id="si1914">
+<div class="lrow"><span class="seq">#1914</span><span class="flag">🇸🇮</span><span class="word">dober</span><span class="gloss">good</span></div>
+
+<div class="ab"><button class="ab-btn old" data-src="https://aquascapehub.com/pronunciation/sl-SI/defcf07c47f1aa23.mp3?v=slshoot1">▶ Petra ♀ (current)</button><button class="ab-btn cand" data-src="https://aquascapehub.com/pronunciation/sl-voicetest/1914_rok.mp3">▶ Rok ♂</button></div>
+<div class="cbox"><label>Which voice? (type the label, or “keep current”)</label><textarea class="cinput cc" data-pid="si1914" rows="1" placeholder="comment…"></textarea></div>
+</div><div class="card" data-id="si1934">
+<div class="lrow"><span class="seq">#1934</span><span class="flag">🇸🇮</span><span class="word">tukaj</span><span class="gloss">here</span></div>
+
+<div class="ab"><button class="ab-btn old" data-src="https://aquascapehub.com/pronunciation/sl-SI/5d09a9e062f81392.mp3?v=slshoot1">▶ Petra ♀ (current)</button><button class="ab-btn cand" data-src="https://aquascapehub.com/pronunciation/sl-voicetest/1934_rok.mp3">▶ Rok ♂</button></div>
+<div class="cbox"><label>Which voice? (type the label, or “keep current”)</label><textarea class="cinput cc" data-pid="si1934" rows="1" placeholder="comment…"></textarea></div>
+</div><div class="card" data-id="si1937">
+<div class="lrow"><span class="seq">#1937</span><span class="flag">🇸🇮</span><span class="word">si</span><span class="gloss">you are</span></div>
+
+<div class="ab"><button class="ab-btn old" data-src="https://aquascapehub.com/pronunciation/sl-SI/e7c69404c147e604.mp3?v=slshoot1">▶ Rok ♂ (current)</button><button class="ab-btn cand" data-src="https://aquascapehub.com/pronunciation/sl-voicetest/1937_petra.mp3">▶ Petra ♀</button></div>
+<div class="cbox"><label>Which voice? (type the label, or “keep current”)</label><textarea class="cinput cc" data-pid="si1937" rows="1" placeholder="comment…"></textarea></div>
+</div><div class="card" data-id="si1941">
+<div class="lrow"><span class="seq">#1941</span><span class="flag">🇸🇮</span><span class="word">je</span><span class="gloss">he is; she is</span></div>
+
+<div class="ab"><button class="ab-btn old" data-src="https://aquascapehub.com/pronunciation/sl-SI/601ac48f670d88f0.mp3?v=slshoot1">▶ Petra ♀ (current)</button><button class="ab-btn cand" data-src="https://aquascapehub.com/pronunciation/sl-voicetest/1941_rok.mp3">▶ Rok ♂</button></div>
+<div class="cbox"><label>Which voice? (type the label, or “keep current”)</label><textarea class="cinput cc" data-pid="si1941" rows="1" placeholder="comment…"></textarea></div>
+</div><div class="card" data-id="si1972">
+<div class="lrow"><span class="seq">#1972</span><span class="flag">🇸🇮</span><span class="word">in</span><span class="gloss">and</span></div>
+
+<div class="ab"><button class="ab-btn old" data-src="https://aquascapehub.com/pronunciation/sl-SI/9ca715a813a6ad80.mp3?v=slshoot1">▶ Petra ♀ (current)</button><button class="ab-btn cand" data-src="https://aquascapehub.com/pronunciation/sl-voicetest/1972_rok.mp3">▶ Rok ♂</button></div>
+<div class="cbox"><label>Which voice? (type the label, or “keep current”)</label><textarea class="cinput cc" data-pid="si1972" rows="1" placeholder="comment…"></textarea></div>
+</div><div class="card" data-id="si1991">
+<div class="lrow"><span class="seq">#1991</span><span class="flag">🇸🇮</span><span class="word">most</span><span class="gloss">bridge</span></div>
+
+<div class="ab"><button class="ab-btn old" data-src="https://aquascapehub.com/pronunciation/sl-SI/d200712311675a02.mp3?v=slshoot1">▶ Petra ♀ (current)</button><button class="ab-btn cand" data-src="https://aquascapehub.com/pronunciation/sl-voicetest/1991_rok.mp3">▶ Rok ♂</button></div>
+<div class="cbox"><label>Which voice? (type the label, or “keep current”)</label><textarea class="cinput cc" data-pid="si1991" rows="1" placeholder="comment…"></textarea></div>
+</div><div class="card" data-id="si1999">
+<div class="lrow"><span class="seq">#1999</span><span class="flag">🇸🇮</span><span class="word">kava</span><span class="gloss">coffee</span></div>
+
+<div class="ab"><button class="ab-btn old" data-src="https://aquascapehub.com/pronunciation/sl-SI/5ac31bf05144b7f7.mp3?v=slshoot1">▶ Rok ♂ (current)</button><button class="ab-btn cand" data-src="https://aquascapehub.com/pronunciation/sl-voicetest/1999_petra.mp3">▶ Petra ♀</button></div>
+<div class="cbox"><label>Which voice? (type the label, or “keep current”)</label><textarea class="cinput cc" data-pid="si1999" rows="1" placeholder="comment…"></textarea></div>
+</div><div class="card" data-id="si2004">
+<div class="lrow"><span class="seq">#2004</span><span class="flag">🇸🇮</span><span class="word">kruh</span><span class="gloss">bread</span></div>
+
+<div class="ab"><button class="ab-btn old" data-src="https://aquascapehub.com/pronunciation/sl-SI/94d0b10ad3d14352.mp3?v=slshoot1">▶ Petra ♀ (current)</button><button class="ab-btn cand" data-src="https://aquascapehub.com/pronunciation/sl-voicetest/2004_rok.mp3">▶ Rok ♂</button></div>
+<div class="cbox"><label>Which voice? (type the label, or “keep current”)</label><textarea class="cinput cc" data-pid="si2004" rows="1" placeholder="comment…"></textarea></div>
+</div><div class="card" data-id="si2005">
+<div class="lrow"><span class="seq">#2005</span><span class="flag">🇸🇮</span><span class="word">sir</span><span class="gloss">cheese</span></div>
+
+<div class="ab"><button class="ab-btn old" data-src="https://aquascapehub.com/pronunciation/sl-SI/c53de442bb9e4feb.mp3?v=slshoot1">▶ Rok ♂ (current)</button><button class="ab-btn cand" data-src="https://aquascapehub.com/pronunciation/sl-voicetest/2005_petra.mp3">▶ Petra ♀</button></div>
+<div class="cbox"><label>Which voice? (type the label, or “keep current”)</label><textarea class="cinput cc" data-pid="si2005" rows="1" placeholder="comment…"></textarea></div>
+</div><div class="card" data-id="si2022">
+<div class="lrow"><span class="seq">#2022</span><span class="flag">🇸🇮</span><span class="word">hoče</span><span class="gloss">he wants; she wants</span></div>
+
+<div class="ab"><button class="ab-btn old" data-src="https://aquascapehub.com/pronunciation/sl-SI/3d031c80a1d26abc.mp3?v=slshoot1">▶ Rok ♂ (current)</button><button class="ab-btn cand" data-src="https://aquascapehub.com/pronunciation/sl-voicetest/2022_petra.mp3">▶ Petra ♀</button></div>
+<div class="cbox"><label>Which voice? (type the label, or “keep current”)</label><textarea class="cinput cc" data-pid="si2022" rows="1" placeholder="comment…"></textarea></div>
+</div><div class="card" data-id="si2031">
+<div class="lrow"><span class="seq">#2031</span><span class="flag">🇸🇮</span><span class="word">želim</span><span class="gloss">I would like</span></div>
+
+<div class="ab"><button class="ab-btn old" data-src="https://aquascapehub.com/pronunciation/sl-SI/6182950534130957.mp3?v=slshoot1">▶ Petra ♀ (current)</button><button class="ab-btn cand" data-src="https://aquascapehub.com/pronunciation/sl-voicetest/2031_rok.mp3">▶ Rok ♂</button></div>
+<div class="cbox"><label>Which voice? (type the label, or “keep current”)</label><textarea class="cinput cc" data-pid="si2031" rows="1" placeholder="comment…"></textarea></div>
+</div><div class="card" data-id="si2032">
+<div class="lrow"><span class="seq">#2032</span><span class="flag">🇸🇮</span><span class="word">Želim čaj, prosim.</span><span class="gloss">I would like tea, please.</span></div>
+
+<div class="ab"><button class="ab-btn old" data-src="https://aquascapehub.com/pronunciation/sl-SI/3c10b8caa43e1988.mp3?v=slshoot1">▶ Rok ♂ (current)</button><button class="ab-btn cand" data-src="https://aquascapehub.com/pronunciation/sl-voicetest/2032_petra.mp3">▶ Petra ♀</button></div>
+<div class="cbox"><label>Which voice? (type the label, or “keep current”)</label><textarea class="cinput cc" data-pid="si2032" rows="1" placeholder="comment…"></textarea></div>
+</div><div class="card" data-id="si2034">
+<div class="lrow"><span class="seq">#2034</span><span class="flag">🇸🇮</span><span class="word">imam</span><span class="gloss">I have</span></div>
+
+<div class="ab"><button class="ab-btn old" data-src="https://aquascapehub.com/pronunciation/sl-SI/dc2441a9755c9d7a.mp3?v=slshoot1">▶ Petra ♀ (current)</button><button class="ab-btn cand" data-src="https://aquascapehub.com/pronunciation/sl-voicetest/2034_rok.mp3">▶ Rok ♂</button></div>
+<div class="cbox"><label>Which voice? (type the label, or “keep current”)</label><textarea class="cinput cc" data-pid="si2034" rows="1" placeholder="comment…"></textarea></div>
+</div><div class="card" data-id="si2037">
+<div class="lrow"><span class="seq">#2037</span><span class="flag">🇸🇮</span><span class="word">imaš</span><span class="gloss">you have</span></div>
+
+<div class="ab"><button class="ab-btn old" data-src="https://aquascapehub.com/pronunciation/sl-SI/8ede63baf49a7647.mp3?v=slshoot1">▶ Petra ♀ (current)</button><button class="ab-btn cand" data-src="https://aquascapehub.com/pronunciation/sl-voicetest/2037_rok.mp3">▶ Rok ♂</button></div>
+<div class="cbox"><label>Which voice? (type the label, or “keep current”)</label><textarea class="cinput cc" data-pid="si2037" rows="1" placeholder="comment…"></textarea></div>
+</div><div class="card" data-id="si2038">
+<div class="lrow"><span class="seq">#2038</span><span class="flag">🇸🇮</span><span class="word">čas</span><span class="gloss">time</span></div>
+
+<div class="ab"><button class="ab-btn old" data-src="https://aquascapehub.com/pronunciation/sl-SI/790653cd9a435a94.mp3?v=slshoot1">▶ Petra ♀ (current)</button><button class="ab-btn cand" data-src="https://aquascapehub.com/pronunciation/sl-voicetest/2038_rok.mp3">▶ Rok ♂</button></div>
+<div class="cbox"><label>Which voice? (type the label, or “keep current”)</label><textarea class="cinput cc" data-pid="si2038" rows="1" placeholder="comment…"></textarea></div>
+</div><div class="card" data-id="si2040">
+<div class="lrow"><span class="seq">#2040</span><span class="flag">🇸🇮</span><span class="word">ima</span><span class="gloss">he has; she has</span></div>
+
+<div class="ab"><button class="ab-btn old" data-src="https://aquascapehub.com/pronunciation/sl-SI/37388e6461be5f18.mp3?v=slshoot1">▶ Petra ♀ (current)</button><button class="ab-btn cand" data-src="https://aquascapehub.com/pronunciation/sl-voicetest/2040_rok.mp3">▶ Rok ♂</button></div>
+<div class="cbox"><label>Which voice? (type the label, or “keep current”)</label><textarea class="cinput cc" data-pid="si2040" rows="1" placeholder="comment…"></textarea></div>
+</div><div class="card" data-id="si2042">
+<div class="lrow"><span class="seq">#2042</span><span class="flag">🇸🇮</span><span class="word">imamo</span><span class="gloss">we have</span></div>
+
+<div class="ab"><button class="ab-btn old" data-src="https://aquascapehub.com/pronunciation/sl-SI/d80aa4e89558fa1c.mp3?v=slshoot1">▶ Petra ♀ (current)</button><button class="ab-btn cand" data-src="https://aquascapehub.com/pronunciation/sl-voicetest/2042_rok.mp3">▶ Rok ♂</button></div>
+<div class="cbox"><label>Which voice? (type the label, or “keep current”)</label><textarea class="cinput cc" data-pid="si2042" rows="1" placeholder="comment…"></textarea></div>
+</div><div class="card" data-id="si2044">
+<div class="lrow"><span class="seq">#2044</span><span class="flag">🇸🇮</span><span class="word">imate</span><span class="gloss">you have</span></div>
+
+<div class="ab"><button class="ab-btn old" data-src="https://aquascapehub.com/pronunciation/sl-SI/e2b8088aaa8a76f2.mp3?v=slshoot1">▶ Rok ♂ (current)</button><button class="ab-btn cand" data-src="https://aquascapehub.com/pronunciation/sl-voicetest/2044_petra.mp3">▶ Petra ♀</button></div>
+<div class="cbox"><label>Which voice? (type the label, or “keep current”)</label><textarea class="cinput cc" data-pid="si2044" rows="1" placeholder="comment…"></textarea></div>
+</div><div class="card" data-id="si2046">
+<div class="lrow"><span class="seq">#2046</span><span class="flag">🇸🇮</span><span class="word">imajo</span><span class="gloss">they have</span></div>
+
+<div class="ab"><button class="ab-btn old" data-src="https://aquascapehub.com/pronunciation/sl-SI/53af1b876c958bec.mp3?v=slshoot1">▶ Petra ♀ (current)</button><button class="ab-btn cand" data-src="https://aquascapehub.com/pronunciation/sl-voicetest/2046_rok.mp3">▶ Rok ♂</button></div>
+<div class="cbox"><label>Which voice? (type the label, or “keep current”)</label><textarea class="cinput cc" data-pid="si2046" rows="1" placeholder="comment…"></textarea></div>
+</div><div class="card" data-id="si2055">
+<div class="lrow"><span class="seq">#2055</span><span class="flag">🇸🇮</span><span class="word">osem</span><span class="gloss">eight</span></div>
+
+<div class="ab"><button class="ab-btn old" data-src="https://aquascapehub.com/pronunciation/sl-SI/fc9b18b70e3111ee.mp3?v=slshoot1">▶ Rok ♂ (current)</button><button class="ab-btn cand" data-src="https://aquascapehub.com/pronunciation/sl-voicetest/2055_petra.mp3">▶ Petra ♀</button></div>
+<div class="cbox"><label>Which voice? (type the label, or “keep current”)</label><textarea class="cinput cc" data-pid="si2055" rows="1" placeholder="comment…"></textarea></div>
+</div><div class="card" data-id="si2057">
+<div class="lrow"><span class="seq">#2057</span><span class="flag">🇸🇮</span><span class="word">deset</span><span class="gloss">ten</span></div>
+
+<div class="ab"><button class="ab-btn old" data-src="https://aquascapehub.com/pronunciation/sl-SI/1310766687331d24.mp3?v=slshoot1">▶ Petra ♀ (current)</button><button class="ab-btn cand" data-src="https://aquascapehub.com/pronunciation/sl-voicetest/2057_rok.mp3">▶ Rok ♂</button></div>
+<div class="cbox"><label>Which voice? (type the label, or “keep current”)</label><textarea class="cinput cc" data-pid="si2057" rows="1" placeholder="comment…"></textarea></div>
+</div><div class="card" data-id="si2075">
+<div class="lrow"><span class="seq">#2075</span><span class="flag">🇸🇮</span><span class="word">račun</span><span class="gloss">the bill</span></div>
+
+<div class="ab"><button class="ab-btn old" data-src="https://aquascapehub.com/pronunciation/sl-SI/89c1705247e71c1c.mp3?v=slshoot1">▶ Petra ♀ (current)</button><button class="ab-btn cand" data-src="https://aquascapehub.com/pronunciation/sl-voicetest/2075_rok.mp3">▶ Rok ♂</button></div>
+<div class="cbox"><label>Which voice? (type the label, or “keep current”)</label><textarea class="cinput cc" data-pid="si2075" rows="1" placeholder="comment…"></textarea></div>
+</div><div class="card" data-id="si2077">
+<div class="lrow"><span class="seq">#2077</span><span class="flag">🇸🇮</span><span class="word">zelo</span><span class="gloss">very</span></div>
+
+<div class="ab"><button class="ab-btn old" data-src="https://aquascapehub.com/pronunciation/sl-SI/12a35371a9ebff18.mp3?v=slshoot1">▶ Petra ♀ (current)</button><button class="ab-btn cand" data-src="https://aquascapehub.com/pronunciation/sl-voicetest/2077_rok.mp3">▶ Rok ♂</button></div>
+<div class="cbox"><label>Which voice? (type the label, or “keep current”)</label><textarea class="cinput cc" data-pid="si2077" rows="1" placeholder="comment…"></textarea></div>
+</div><div class="card" data-id="si2080">
+<div class="lrow"><span class="seq">#2080</span><span class="flag">🇸🇮</span><span class="word">kako</span><span class="gloss">how</span></div>
+
+<div class="ab"><button class="ab-btn old" data-src="https://aquascapehub.com/pronunciation/sl-SI/06c88665970fa6ca.mp3?v=slshoot1">▶ Rok ♂ (current)</button><button class="ab-btn cand" data-src="https://aquascapehub.com/pronunciation/sl-voicetest/2080_petra.mp3">▶ Petra ♀</button></div>
+<div class="cbox"><label>Which voice? (type the label, or “keep current”)</label><textarea class="cinput cc" data-pid="si2080" rows="1" placeholder="comment…"></textarea></div>
+</div><div class="card" data-id="si1998">
+<div class="lrow"><span class="seq">#1998</span><span class="flag">🇸🇮</span><span class="word">Mesto je dobro.</span><span class="gloss">The city is good.</span></div>
+
+<div class="ab"><button class="ab-btn old" data-src="https://aquascapehub.com/pronunciation/sl-SI/6401de54ef4900b3.mp3?v=slshoot1">▶ Petra ♀ (current)</button><button class="ab-btn cand" data-src="https://aquascapehub.com/pronunciation/sl-voicetest/1998_rok.mp3">▶ Rok ♂</button></div>
+<div class="cbox"><label>Which voice? (type the label, or “keep current”)</label><textarea class="cinput cc" data-pid="si1998" rows="1" placeholder="comment…"></textarea></div>
+</div></div>
+<div class="sec" id="sec-en"><div class="card" data-id="en1987">
+<div class="lrow"><span class="seq">#1987</span><span class="flag">🇬🇧</span><span class="word">I understand</span><span class="gloss">🇸🇮 razumem</span></div>
+
+<div class="ab"><button class="ab-btn old" data-src="https://aquascapehub.com/pronunciation/en-GB/baa57e8470f8570f.mp3?v=slshoot1">▶ Current</button><button class="ab-btn cand" data-src="https://aquascapehub.com/pronunciation/sl-voicetest/1987_sonia.mp3">▶ Sonia ♀</button><button class="ab-btn cand" data-src="https://aquascapehub.com/pronunciation/sl-voicetest/1987_thomas.mp3">▶ Thomas ♂</button><button class="ab-btn cand" data-src="https://aquascapehub.com/pronunciation/sl-voicetest/1987_ryan.mp3">▶ Ryan ♂</button></div>
+<div class="cbox"><label>Which English voice? (Sonia / Thomas / Ryan / keep current)</label><textarea class="cinput cc" data-pid="en1987" rows="1" placeholder="comment…"></textarea></div>
+</div><div class="card" data-id="en1993">
+<div class="lrow"><span class="seq">#1993</span><span class="flag">🇬🇧</span><span class="word">Ljubljana</span><span class="gloss">🇸🇮 Ljubljana</span></div>
+
+<div class="ab"><button class="ab-btn old" data-src="https://aquascapehub.com/pronunciation/en-GB/74b4e19a414fda6c.mp3?v=slshoot1">▶ Current</button><button class="ab-btn cand" data-src="https://aquascapehub.com/pronunciation/sl-voicetest/1993_sonia.mp3">▶ Sonia ♀</button><button class="ab-btn cand" data-src="https://aquascapehub.com/pronunciation/sl-voicetest/1993_thomas.mp3">▶ Thomas ♂</button><button class="ab-btn cand" data-src="https://aquascapehub.com/pronunciation/sl-voicetest/1993_ryan.mp3">▶ Ryan ♂</button></div>
+<div class="cbox"><label>Which English voice? (Sonia / Thomas / Ryan / keep current)</label><textarea class="cinput cc" data-pid="en1993" rows="1" placeholder="comment…"></textarea></div>
+</div><div class="card" data-id="en1996">
+<div class="lrow"><span class="seq">#1996</span><span class="flag">🇬🇧</span><span class="word">Ljubljana is beautiful.</span><span class="gloss">🇸🇮 Ljubljana je lepa.</span></div>
+
+<div class="ab"><button class="ab-btn old" data-src="https://aquascapehub.com/pronunciation/en-GB/3dfc6afd3c3781a4.mp3?v=slshoot1">▶ Current</button><button class="ab-btn cand" data-src="https://aquascapehub.com/pronunciation/sl-voicetest/1996_sonia.mp3">▶ Sonia ♀</button><button class="ab-btn cand" data-src="https://aquascapehub.com/pronunciation/sl-voicetest/1996_thomas.mp3">▶ Thomas ♂</button><button class="ab-btn cand" data-src="https://aquascapehub.com/pronunciation/sl-voicetest/1996_ryan.mp3">▶ Ryan ♂</button></div>
+<div class="cbox"><label>Which English voice? (Sonia / Thomas / Ryan / keep current)</label><textarea class="cinput cc" data-pid="en1996" rows="1" placeholder="comment…"></textarea></div>
+</div><div class="card" data-id="en2002">
+<div class="lrow"><span class="seq">#2002</span><span class="flag">🇬🇧</span><span class="word">beer</span><span class="gloss">🇸🇮 pivo</span></div>
+
+<div class="ab"><button class="ab-btn old" data-src="https://aquascapehub.com/pronunciation/en-GB/ac4c91c30744f3c3.mp3?v=slshoot1">▶ Current</button><button class="ab-btn cand" data-src="https://aquascapehub.com/pronunciation/sl-voicetest/2002_sonia.mp3">▶ Sonia ♀</button><button class="ab-btn cand" data-src="https://aquascapehub.com/pronunciation/sl-voicetest/2002_thomas.mp3">▶ Thomas ♂</button><button class="ab-btn cand" data-src="https://aquascapehub.com/pronunciation/sl-voicetest/2002_ryan.mp3">▶ Ryan ♂</button></div>
+<div class="cbox"><label>Which English voice? (Sonia / Thomas / Ryan / keep current)</label><textarea class="cinput cc" data-pid="en2002" rows="1" placeholder="comment…"></textarea></div>
+</div><div class="card" data-id="en3343">
+<div class="lrow"><span class="seq">#3343</span><span class="flag">🇬🇧</span><span class="word">also / too</span><span class="gloss">🇸🇮 anche</span></div>
+
+<div class="ab"><button class="ab-btn old" data-src="https://aquascapehub.com/pronunciation/en-GB/32354725ff80a212.mp3?v=slshoot1">▶ Current</button><button class="ab-btn cand" data-src="https://aquascapehub.com/pronunciation/sl-voicetest/3343_sonia.mp3">▶ Sonia ♀</button><button class="ab-btn cand" data-src="https://aquascapehub.com/pronunciation/sl-voicetest/3343_thomas.mp3">▶ Thomas ♂</button><button class="ab-btn cand" data-src="https://aquascapehub.com/pronunciation/sl-voicetest/3343_ryan.mp3">▶ Ryan ♂</button></div>
+<div class="cbox"><label>Which English voice? (Sonia / Thomas / Ryan / keep current)</label><textarea class="cinput cc" data-pid="en3343" rows="1" placeholder="comment…"></textarea></div>
+</div></div>
+</main>
+
+<style>
+#cbar{position:fixed;right:14px;bottom:14px;z-index:9999;display:flex;gap:6px;align-items:center;
+ background:#12161c;border:1px solid #2a323d;border-radius:12px;padding:8px 10px;
+ box-shadow:0 6px 24px rgba(0,0,0,.4);font:13px -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;color:#e8edf2}
+#cbar button{background:#243447;color:#dbe7f5;border:1px solid #33475c;border-radius:8px;padding:6px 10px;cursor:pointer;font-size:12.5px}
+#cbar button#cbtnj{background:#1f7a48;border-color:#2c9c5e;color:#eafff2;font-weight:600}
+#cbar button:hover{filter:brightness(1.12)}
+#cbarn{color:#9db0c4;margin-right:2px}
+.cinput{width:100%;min-width:120px;background:#0f141a;color:#e8edf2;border:1px solid #2a323d;border-radius:7px;
+ padding:6px 8px;font:13px inherit;resize:vertical;box-sizing:border-box}
+.cinput:focus{outline:2px solid #3ea06b;border-color:#3ea06b}
+.ccell.has .cinput,.cbox.has .cinput{border-color:#3ea06b;background:#0e1a13}
+.cbox{margin-top:8px}
+.cbox label{display:block;font-size:11.5px;color:#7f8a97;margin-bottom:3px}
+.chelp{background:#173626;color:#bfeecb;
+ font:12.5px -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;padding:6px 12px;text-align:center;border-bottom:1px solid #245a3c}
+.chelp b{color:#eafff2}
+</style>
+<script>
+(function(){
+ var KEY='lingoodie_comments_sl_shootout_v1', PREFIX='lingoodieslshootout', PAGE='Slovenian voice shootout';
+ var mem={}, store;
+ try{ store=JSON.parse(localStorage.getItem(KEY)||'{}'); }catch(e){ store=mem; }
+ function persist(){ try{ localStorage.setItem(KEY,JSON.stringify(store)); }catch(e){} }
+ function setC(pid,val,ctx){ pid=String(pid);
+   if(val && val.trim()){ store[pid]=Object.assign({},ctx||{},{comment:val.trim(),ts:new Date().toISOString()}); }
+   else { delete store[pid]; }
+   persist(); updateBar();
+ }
+ function getC(pid){ var e=store[String(pid)]; return e?e.comment:''; }
+ function count(){ return Object.keys(store).length; }
+ function dl(name,text,type){ var b=new Blob([text],{type:type}); var a=document.createElement('a');
+   a.href=URL.createObjectURL(b); a.download=name; document.body.appendChild(a); a.click(); a.remove();
+   setTimeout(function(){URL.revokeObjectURL(a.href);},1000); }
+ function stamp(){ var d=new Date(); function p(n){return String(n).padStart(2,'0');}
+   return d.getFullYear()+p(d.getMonth()+1)+p(d.getDate()); }
+ function exportJSON(){ dl(PREFIX+'-'+stamp()+'.json',
+   JSON.stringify({page:PAGE,exported:new Date().toISOString(),count:count(),comments:store},null,2),
+   'application/json'); }
+ function exportCSV(){ var rows=[['pid','lang','target','english','comment']];
+   for(var pid in store){ var c=store[pid]; rows.push([pid,c.lang||'',c.target||'',c.english||'',c.comment||'']); }
+   var csv=rows.map(function(r){return r.map(function(x){return '"'+String(x==null?'':x).replace(/"/g,'""')+'"';}).join(',');}).join('\n');
+   dl(PREFIX+'-'+stamp()+'.csv','\ufeff'+csv,'text/csv;charset=utf-8'); }
+ var bar;
+ function buildBar(){ bar=document.createElement('div'); bar.id='cbar';
+   bar.innerHTML='<span id="cbarn"></span>'+
+     '<button id="cbtnj">\u2b73 Download comments</button>'+
+     '<button id="cbtnc">CSV</button>'+
+     '<button id="cbtnx" title="clear all comments on this device">\u2715</button>';
+   document.body.appendChild(bar);
+   bar.querySelector('#cbtnj').onclick=exportJSON;
+   bar.querySelector('#cbtnc').onclick=exportCSV;
+   bar.querySelector('#cbtnx').onclick=function(){ if(confirm('Clear ALL comments on this device? (export first if you want to keep them)')){
+     store={}; persist(); document.querySelectorAll('.cinput').forEach(function(t){t.value='';
+       var h=t.closest('.ccell')||t.closest('.cbox'); if(h)h.classList.remove('has');}); updateBar(); } };
+   var help=document.createElement('div'); help.className='chelp';
+   help.innerHTML='\uD83D\uDCAC Type a comment on any word pair, then click <b>Download comments</b> (bottom-right) and send Sara the file.';
+   document.body.insertBefore(help, document.body.firstChild);
+   updateBar();
+ }
+ function updateBar(){ var el=document.getElementById('cbarn'); if(!el)return; var n=count();
+   el.textContent=n?('\uD83D\uDCAC '+n+' comment'+(n>1?'s':'')+' saved'):'\uD83D\uDCAC no comments yet'; }
+ if(document.readyState!=='loading') buildBar(); else document.addEventListener('DOMContentLoaded',buildBar);
+ window.LComments={setC:setC,getC:getC,updateBar:updateBar,store:function(){return store;}};
+})();
+</script><script>(function(){function wire(){document.querySelectorAll('.cc').forEach(function(ta){if(ta._w)return;ta._w=1;
+ var pid=ta.getAttribute('data-pid');var card=ta.closest('.card');var t=(card.querySelector('.word')||{}).textContent||'';var e=(card.querySelector('.gloss')||{}).textContent||'';
+ ta.value=window.LComments.getC(pid);if(ta.value)ta.closest('.cbox').classList.add('has');
+ ta.addEventListener('input',function(){window.LComments.setC(pid,ta.value,{lang:pid.slice(0,2),target:t,english:e});
+ ta.closest('.cbox').classList.toggle('has',!!ta.value.trim());});});}
+ if(document.readyState!=='loading')wire();else document.addEventListener('DOMContentLoaded',wire);})();</script><script>(function(){var cur=null,cb=null;document.addEventListener('click',function(e){var b=e.target.closest('.ab-btn');if(!b)return;
+ var s=b.getAttribute('data-src');if(!s)return;if(cb)cb.classList.remove('playing');if(cur){cur.pause();cur=null;}
+ cur=new Audio(s);cb=b;b.classList.add('playing');cur.play().catch(function(){b.classList.add('err');});
+ cur.onended=function(){b.classList.remove('playing');};});})();</script><script>(function(){function tab(t){document.body.setAttribute('data-tab',t);
+ ['tsi','ten'].forEach(function(i){document.getElementById(i).classList.toggle('active',i==='t'+t);});window.scrollTo(0,0);}
+ document.getElementById('tsi').onclick=function(){tab('si');};document.getElementById('ten').onclick=function(){tab('en');};})();</script><footer>Slovenian voice shootout · pick a voice per row, then Download comments → send Sara.</footer>
+</body></html>

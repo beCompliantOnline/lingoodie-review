@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Northern Pakistan · Sara & Antonio · Sep 9–23 (12-day joint loop)</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
+<style>
+  :root{
+    --ink:#1e241d; --muted:#5f6b5c; --line:#e3e6db;
+    --city:#b8860b; --city-bg:#f6edd6;
+    --nature:#1f6f43; --nature-bg:#e2f0e6;
+    --travel:#4f6b86; --travel-bg:#e8eef4;
+    --paper:#fbfbf5; --card:#ffffff; --accent:#0f5132;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    color:var(--ink);background:var(--paper);line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:900px;margin:0 auto;padding:0 20px 80px}
+  header.hero{position:relative;overflow:hidden;color:#fff;text-align:center;padding:66px 20px;
+    background:linear-gradient(135deg,#0c3d28 0%,#1f6f43 55%,#2b6ea0 100%)}
+  .hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+  .hero-tint{position:absolute;inset:0;z-index:1;background:linear-gradient(135deg,rgba(10,55,36,.72),rgba(20,90,58,.5) 55%,rgba(30,80,120,.6))}
+  header.hero .inner{position:relative;z-index:2;max-width:860px;margin:0 auto}
+  .kicker{letter-spacing:.28em;text-transform:uppercase;font-size:12px;opacity:.95;margin-bottom:14px}
+  header.hero h1{margin:0;font-size:clamp(28px,6vw,44px);font-weight:800;line-height:1.1;text-shadow:0 2px 16px rgba(0,0,0,.4)}
+  header.hero p{margin:14px auto 0;max-width:610px;font-size:16px;text-shadow:0 1px 8px rgba(0,0,0,.4)}
+  .badges{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:22px}
+  .badge{background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.4);padding:6px 13px;border-radius:999px;font-size:13px;backdrop-filter:blur(3px)}
+  .callout{display:flex;gap:14px;margin:26px 0 8px;flex-wrap:wrap}
+  .callout .col{flex:1;min-width:230px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+  .callout .col h3{margin:0 0 4px;font-size:15px;display:flex;align-items:center;gap:8px}
+  .callout .col p{margin:0;font-size:13.5px;color:var(--muted)}
+  .dot{width:11px;height:11px;border-radius:50%;display:inline-block}
+  .dot.city{background:var(--city)} .dot.nature{background:var(--nature)}
+  .route{margin:24px 0 6px;font-size:14px;color:var(--muted);text-align:center}
+  .route b{color:var(--ink)}
+  #route-map{height:470px;border-radius:16px;overflow:hidden;border:1px solid var(--line);margin-top:14px;background:#eef1ea}
+  .leaflet-popup-content{font-size:13px;line-height:1.45}.leaflet-popup-content b{color:#0f5132}
+  .maplegend{display:flex;gap:16px;flex-wrap:wrap;font-size:12.5px;color:var(--muted);margin-top:12px}
+  .maplegend span{display:flex;align-items:center;gap:6px}
+  .msw{width:13px;height:13px;border-radius:50%;display:inline-block;border:2px solid #fff;box-shadow:0 0 0 1px rgba(0,0,0,.15)}
+  .day{background:var(--card);border:1px solid var(--line);border-radius:16px;margin:18px 0;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+  .gallery{display:flex;gap:3px;height:250px;background:#dfe3d8}
+  .gallery img{flex:1;min-width:0;height:100%;object-fit:cover;display:block;background:#dfe3d8}
+  .day .top{display:flex;align-items:flex-start;gap:16px;padding:18px 22px 6px}
+  .daynum{flex:none;width:58px;height:58px;border-radius:13px;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    font-weight:800;line-height:1;color:#fff;margin-top:-48px;border:3px solid #fff;box-shadow:0 3px 8px rgba(0,0,0,.25);position:relative;z-index:3;text-align:center}
+  .daynum small{font-size:8.5px;font-weight:700;letter-spacing:.06em;opacity:.95;margin-bottom:2px}
+  .daynum .n{font-size:22px}
+  .city-bar{background:var(--city)} .nature-bar{background:var(--nature)} .travel-bar{background:var(--travel)}
+  .day .head{flex:1}
+  .day .head h2{margin:2px 0 6px;font-size:19px}
+  .tag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:3px 9px;border-radius:6px;margin-right:6px}
+  .tag.city{background:var(--city-bg);color:#8a6608}
+  .tag.nature{background:var(--nature-bg);color:var(--nature)}
+  .tag.travel{background:var(--travel-bg);color:var(--travel)}
+  .tag.thrill{background:#fde8e8;color:#b3261e}
+  .day .body{padding:4px 22px 22px}
+  .day p{margin:8px 0} .day ul{margin:8px 0;padding-left:20px} .day li{margin:5px 0}
+  .meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+  .chip{font-size:12.5px;background:#f2f1e6;border:1px solid var(--line);border-radius:8px;padding:6px 11px;color:var(--muted)}
+  .chip b{color:var(--ink);font-weight:600}
+  .hike{background:var(--nature-bg);border-left:4px solid var(--nature);border-radius:0 10px 10px 0;padding:10px 14px;margin:12px 0;font-size:13.5px}
+  .hike b{color:var(--nature)}
+  .thrillbox{background:#fdeceb;border-left:4px solid #b3261e;border-radius:0 10px 10px 0;padding:10px 14px;margin:12px 0;font-size:13.5px}
+  .thrillbox b{color:#b3261e}
+  h2.section{margin:44px 0 6px;font-size:22px;border-bottom:2px solid var(--line);padding-bottom:8px}
+  .safety{background:#fff7ed;border:1px solid #f0d9b5;border-left:5px solid #c99a2e;border-radius:12px;padding:14px 20px;margin-top:14px}
+  .safety h4{margin:6px 0 6px;font-size:15px;color:#9a6a00}.safety p{margin:6px 0;font-size:13.5px;color:#5c4a1e}
+  .tips{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:6px 22px;margin-top:14px}
+  .tips h4{margin:16px 0 4px;font-size:15px;color:var(--accent)}.tips p{margin:4px 0 14px;font-size:14px;color:#3a443a}
+  .cards{display:flex;flex-wrap:wrap;gap:12px;margin-top:14px}
+  .opcard{flex:1;min-width:240px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+  .opcard h4{margin:0 0 6px;font-size:15px;color:var(--accent)}.opcard p{margin:0;font-size:13.5px;color:#3a443a}
+  .costtable{width:100%;border-collapse:collapse;margin-top:14px;font-size:14px;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .costtable th,.costtable td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+  .costtable th{background:#f2f1e6;font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
+  .costtable td.amt{white-space:nowrap;font-weight:700;color:#0f5132}
+  .costtable tr:last-child td{border-bottom:none}
+  .costtable tr.total td{background:#e6f0e9;font-weight:800;font-size:15px}
+  .costnote{font-size:13px;color:var(--muted);margin-top:10px}
+  footer{text-align:center;color:var(--muted);font-size:13px;margin-top:40px}
+  a{color:var(--accent)}
+  /* optional / skippable styling */
+  .day.opt{border:2px dashed #d98a00;background:#fffdf7}
+  .opt-badge{display:inline-block;background:#fff3e0;color:#a8660a;border:1px solid #f0c98a;font-size:10.5px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;padding:3px 9px;border-radius:6px;margin-left:6px;vertical-align:middle}
+  .opt-inline{background:#fff3e0;color:#a8660a;border:1px solid #f0c98a;border-radius:6px;padding:1px 7px;font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.03em}
+  .pre{background:#eef6f6;border:1px solid #cfe6e6;border-radius:16px;margin:18px 0;overflow:hidden}
+  .pre .top{display:flex;align-items:flex-start;gap:16px;padding:18px 22px 6px}
+  .pre .badge2{flex:none;min-width:96px;padding:10px 12px;border-radius:12px;background:#2b8a8a;color:#fff;text-align:center;font-weight:800;line-height:1.15;margin-top:-40px;border:3px solid #fff;box-shadow:0 3px 8px rgba(0,0,0,.2)}
+  .pre .badge2 small{display:block;font-size:9px;letter-spacing:.06em;opacity:.9}
+  .pre .body{padding:4px 22px 22px}
+  @media(max-width:560px){.gallery{height:180px}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <img class="hero-img" alt="Autumn in the Hunza Valley" referrerpolicy="no-referrer" onerror="this.style.display='none'"
+    src="https://commons.wikimedia.org/wiki/Special:FilePath/Autumn_in_Hunza_Valley_Pakistan.jpg?width=1600">
+  <div class="hero-tint"></div>
+  <div class="inner">
+    <div class="kicker">Northern Pakistan · Sara 9–23 Sep · Antonio 12–23 Sep</div>
+    <h1>12 Days Together: Hunza → Skardu → Direct to Lahore</h1>
+    <p>Sara lands first (<b>Sep 9</b>) for an Islamabad head-start — Urdu school &amp; day trips — then the two of you set off the moment Antonio arrives (<b>Sep 12</b>). A clean west-to-east sweep to Gilgit, Hunza, Nanga Parbat and Baltistan, finishing on a single <b>direct Skardu→Lahore flight</b>. No backtracking, no long hauls.</p>
+    <div class="badges">
+      <span class="badge">🗣 Sara's 3-day Urdu head-start</span>
+      <span class="badge">✈️ In Islamabad · out Lahore</span>
+      <span class="badge">🎯 Direct Skardu→Lahore</span>
+      <span class="badge">🪂 Rakaposhi zipline</span>
+      <span class="badge">🟠 Amber = optional / skippable</span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="pre" style="border-color:#bcdcc7;background:#eef7f0;margin-top:26px">
+    <div class="top">
+      <div class="badge2" style="background:#1f6f43">DOABLE<small>with room to spare</small></div>
+      <div class="head">
+        <h2 style="margin:2px 0 6px;font-size:19px">Yes — it fits comfortably, nothing has to be cut</h2>
+        <p style="margin:6px 0;color:#3a443a;font-size:14px">Antonio's window (<b>Sep 12 → 23</b>) is exactly the <b>12 days</b> this northern loop needs, so the two of you can do the whole thing together without dropping a single stop. Sara's extra <b>Sep 9–11</b> simply become a relaxed <b>Islamabad head-start</b> — Urdu lessons and a couple of easy day trips — before Antonio lands.</p>
+        <p style="margin:6px 0;color:#3a443a;font-size:14px">If you'd still like a <b>gentler pace</b>, I've flagged the genuinely optional bits in <span class="opt-inline">amber</span>: two full days (Khaplu, and the Skardu buffer/desert) plus a few side-trips. Drop them and you have a very relaxed <b>10-day core</b>; keep them and you're still comfortable. Your call — nothing amber is essential.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <div class="col">
+      <h3><span class="dot nature"></span> Why this order</h3>
+      <p>You spotted the key: PIA flies <b>Skardu → Lahore nonstop</b> (PK-454, ~€95). So we run <b>west→east</b> — fly up to <b>Gilgit</b>, sweep through Hunza, Fairy Meadows and Baltistan, and fly the reliable <b>direct hop from Skardu to Lahore</b>. No overland grind, no Islamabad connection at the end.</p>
+    </div>
+    <div class="col">
+      <h3><span class="dot city"></span> Smart risk placement</h3>
+      <p>Mountain flights can slip for weather, so the flaky one sits at the <b>start</b> (Gilgit-in — if it cancels you just drive up). The <b>end</b> uses the reliable direct Skardu→Lahore, with a Skardu <b>buffer day</b> before it — nothing threatens your flight home.</p>
+    </div>
+  </div>
+
+  <p class="route">Route: <b>Islamabad</b> ✈ <b>Gilgit</b> → <b>Hunza</b> → <b>Fairy Meadows</b> → <b>Skardu</b> → <b>Khaplu</b> ✈ <b>Lahore</b> (direct).</p>
+
+  <div id="route-map"></div>
+  <div class="maplegend">
+    <span><span style="display:inline-block;width:24px;border-top:4px solid #0f5132"></span> 🚙 drive</span>
+    <span><span style="display:inline-block;width:24px;border-top:3px dashed #2f6bd6"></span> ✈️ flight</span>
+    <span>➤ arrows show direction of travel</span>
+    <span><span class="msw" style="background:#c0392b"></span> overnight base</span>
+    <span><span class="msw" style="background:#e08a1e"></span> zipline</span>
+  </div>
+
+  <!-- SARA'S HEAD-START -->
+  <h2 class="section">🗣️ Sara's head-start · Sep 9–11, Islamabad</h2>
+  <div class="pre">
+    <div class="top">
+      <div class="badge2">SEP<br>9–11<small>Sara solo</small></div>
+      <div class="head">
+        <h2 style="margin:2px 0 6px;font-size:19px">Three easy days before Antonio lands</h2>
+        <p style="margin:6px 0;color:#3a443a;font-size:14px">You arrive <b>Sep 9</b> and settle into Islamabad. Start <b>Urdu lessons</b> (NUML or a private tutor — details below), acclimatise, sort SIM/cash and the mountain packing, and cherry-pick an easy day trip or two. Keep it gentle — the mountains start the day Antonio arrives.</p>
+        <div class="cards" style="margin-top:12px">
+          <div class="opcard"><h4>🏛 Taxila</h4><p>UNESCO Gandhara ruins &amp; museum, ~1 hr west. Half-day.</p></div>
+          <div class="opcard"><h4>🏰 Rohtas Fort</h4><p>Vast 16th-c. Sher Shah Suri fortress, ~2 hrs south. Full day (can pair with Jhelum).</p></div>
+          <div class="opcard"><h4>⛏ Khewra Salt Mine</h4><p>The world's 2nd-largest salt mine, ~2.5 hrs south. Full day.</p></div>
+          <div class="opcard"><h4>🥾 Margalla Hills</h4><p>Trail 5 to Monal, or Daman-e-Koh viewpoint — right on Islamabad's edge. Half-day.</p></div>
+          <div class="opcard"><h4>🕌 Rawalpindi</h4><p>Raja Bazaar, Saddar &amp; old-city bustle — the gritty twin city next door.</p></div>
+        </div>
+        <div class="meta" style="margin-top:12px"><span class="chip">🛏 Base: <b>Islamabad</b> (5 nights total, through Sep 13)</span><span class="chip">🗣 Urdu at NUML — see below</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 1 -->
+  <div class="day">
+    <div class="gallery">
+      <img alt="Faisal Mosque, Islamabad" referrerpolicy="no-referrer" loading="lazy" onerror="this.style.display='none'" src="https://commons.wikimedia.org/wiki/Special:FilePath/Shah_Faisal_Masjid%2C_Islamabad.JPG?width=1000">
+      <img alt="Pakistan Monument, Islamabad" referrerpolicy="no-referrer" loading="lazy" onerror="this.style.display='none'" src="https://commons.wikimedia.org/wiki/Special:FilePath/Pakistan_Monument_Islamabad_PK.jpg?width=1000">
+    </div>
+    <div class="top">
+      <div class="daynum city-bar"><small>SEP 12</small><span class="n">1</span></div>
+      <div class="head"><h2>Antonio arrives — you're both in Islamabad</h2><span class="tag city">City</span></div>
+    </div>
+    <div class="body">
+      <p>Antonio lands (Etihad, early AM) — Sara's already settled and Urdu-warmed. Easy reunion day: an unhurried half-day at <b>Faisal Mosque</b>, <b>Pakistan Monument</b> and <b>Daman-e-Koh</b>, confirm tomorrow's Gilgit flight, and pack a light mountain bag together.</p>
+      <div class="meta"><span class="chip">🛏 Stay: <b>Islamabad</b></span><span class="chip">🗣 Sara can show Antonio a few Urdu phrases</span></div>
+    </div>
+  </div>
+
+  <!-- DAY 2 -->
+  <div class="day">
+    <div class="gallery">
+      <img alt="Rakaposhi from the Karakoram Highway" referrerpolicy="no-referrer" loading="lazy" onerror="this.style.display='none'" src="https://commons.wikimedia.org/wiki/Special:FilePath/Rakaposhi_Mountain%2C_GB.jpg?width=1000">
+      <img alt="Rakaposhi ice wall" referrerpolicy="no-referrer" loading="lazy" onerror="this.style.display='none'" src="https://commons.wikimedia.org/wiki/Special:FilePath/The_Ice_Wall_-_Rakaposhi_Hunza.jpg?width=1000">
+    </div>
+    <div class="top">
+      <div class="daynum travel-bar"><small>SEP 13</small><span class="n">2</span></div>
+      <div class="head"><h2>Fly ISB → Gilgit, drive to Hunza + zipline</h2><span class="tag travel">Flight</span><span class="tag thrill">Thrill</span></div>
+    </div>
+    <div class="body">
+      <p>A short, scenic flight up to <b>Gilgit</b> (weather-flexible — drive-up fallback if it slips), then up the Hunza River to <b>Karimabad</b>.</p>
+      <div class="thrillbox"><b>🪂 Rakaposhi Zipline:</b> stop at the <b>Ghulmet viewpoint</b> beneath the 7,788 m ice wall and zip across the valley — glacier-water coffee afterwards.</div>
+      <div class="meta"><span class="chip">✈️ ISB→Gilgit ~1 hr (~€65)</span><span class="chip">🛏 Stay: <b>Karimabad, Hunza</b> (3 nights)</span></div>
+    </div>
+  </div>
+
+  <!-- DAY 3 -->
+  <div class="day">
+    <div class="gallery">
+      <img alt="Baltit Fort, Karimabad" referrerpolicy="no-referrer" loading="lazy" onerror="this.style.display='none'" src="https://commons.wikimedia.org/wiki/Special:FilePath/Baltit_fort_Karimabad_Hunza.jpg?width=1000">
+      <img alt="Altit Fort, Hunza" referrerpolicy="no-referrer" loading="lazy" onerror="this.style.display='none'" src="https://commons.wikimedia.org/wiki/Special:FilePath/Altit_Fort_-_Hunza_valley.jpg?width=1000">
+      <img alt="Hunza Valley from Eagle's Nest" referrerpolicy="no-referrer" loading="lazy" onerror="this.style.display='none'" src="https://commons.wikimedia.org/wiki/Special:FilePath/Hunza_Valley%2C_view_from_Eagle%27s_Nest.jpg?width=1000">
+    </div>
+    <div class="top">
+      <div class="daynum city-bar"><small>SEP 14</small><span class="n">3</span></div>
+      <div class="head"><h2>Hunza — forts &amp; the Eagle's Nest</h2><span class="tag city">Culture</span><span class="tag nature">Views</span></div>
+    </div>
+    <div class="body">
+      <ul>
+        <li><b>Baltit</b> &amp; <b>Altit</b> forts, the old village of <b>Ganish</b>, Karimabad's bazaar.</li>
+        <li>Sunrise or sunset from <b>Duikar / Eagle's Nest</b> — the finest valley panorama in Pakistan.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- DAY 4 -->
+  <div class="day">
+    <div class="gallery">
+      <img alt="Attabad Lake" referrerpolicy="no-referrer" loading="lazy" onerror="this.style.display='none'" src="https://commons.wikimedia.org/wiki/Special:FilePath/Attabad_Lake%2C_Hunza_Pakistan.jpg?width=1000">
+      <img alt="Passu Cones" referrerpolicy="no-referrer" loading="lazy" onerror="this.style.display='none'" src="https://commons.wikimedia.org/wiki/Special:FilePath/Passu_Cones_-_Hunza_Valley_Pakistan.jpg?width=1000">
+      <img alt="Hussaini suspension bridge" referrerpolicy="no-referrer" loading="lazy" onerror="this.style.display='none'" src="https://commons.wikimedia.org/wiki/Special:FilePath/The_Hussaini_Hanging_Bridge.jpg?width=1000">
+    </div>
+    <div class="top">
+      <div class="daynum nature-bar"><small>SEP 15</small><span class="n">4</span></div>
+      <div class="head"><h2>Upper Hunza (Gojal)</h2><span class="tag nature">Nature</span></div>
+    </div>
+    <div class="body">
+      <ul>
+        <li><b>Attabad Lake</b> (boat or jet-ski), the <b>Passu Cones</b> &amp; glacier, the swaying <b>Hussaini bridge</b>.</li>
+        <li><span class="opt-inline">Optional</span> push to <b>Khunjerab Pass (4,693 m)</b>, the world's highest paved border — or the <span class="opt-inline">Optional</span> side-trip to the coloured lakes of <b>Naltar Valley</b>. Either is easy to drop for a slower day.</li>
+      </ul>
+      <div class="meta"><span class="chip">🧥 Cold &amp; high up top — layer up</span></div>
+    </div>
+  </div>
+
+  <!-- DAY 5 -->
+  <div class="day">
+    <div class="gallery">
+      <img alt="Fairy Meadows with Nanga Parbat" referrerpolicy="no-referrer" loading="lazy" onerror="this.style.display='none'" src="https://commons.wikimedia.org/wiki/Special:FilePath/Fairy_Meadows_and_the_view_of_Nanga_Parbat.jpg?width=1000">
+      <img alt="Pakistan flag at Fairy Meadows" referrerpolicy="no-referrer" loading="lazy" onerror="this.style.display='none'" src="https://commons.wikimedia.org/wiki/Special:FilePath/Pakistan%27s_flag_at_Fairy_Meadows_with_Nanga_Parbat_in_the_background.JPG?width=1000">
+    </div>
+    <div class="top">
+      <div class="daynum travel-bar"><small>SEP 16</small><span class="n">5</span></div>
+      <div class="head"><h2>Hunza → Fairy Meadows</h2><span class="tag travel">Transit</span><span class="tag nature">Nature</span></div>
+    </div>
+    <div class="body">
+      <p>Drive south down the KKH to the <b>Raikot Bridge</b>, then the famous (hair-raising) jeep to <b>Tato</b> and the walk up to the meadow.</p>
+      <div class="hike"><b>🥾 Warm-up hike:</b> ~3–4 km / 2–3 hrs uphill through pine forest to ~3,300 m, Nanga Parbat filling the sky. Ponies available. Overnight in the cabins.</div>
+      <div class="meta"><span class="chip">🏡 Overnight: Fairy Meadows (2 nights)</span></div>
+    </div>
+  </div>
+
+  <!-- DAY 6 -->
+  <div class="day">
+    <div class="gallery">
+      <img alt="Beyal Camp, Nanga Parbat" referrerpolicy="no-referrer" loading="lazy" onerror="this.style.display='none'" src="https://commons.wikimedia.org/wiki/Special:FilePath/Beyal_camp_nanga_parbat.jpg?width=1000">
+      <img alt="Nanga Parbat base camp" referrerpolicy="no-referrer" loading="lazy" onerror="this.style.display='none'" src="https://commons.wikimedia.org/wiki/Special:FilePath/Base_Camp_Nanga_Parbat_Fairy_Meadows.JPG?width=1000">
+      <img alt="Nanga Parbat from the trek" referrerpolicy="no-referrer" loading="lazy" onerror="this.style.display='none'" src="https://commons.wikimedia.org/wiki/Special:FilePath/Nanga_Parbat_View_from_Fairy_Meadow_trek.jpg?width=1000">
+    </div>
+    <div class="top">
+      <div class="daynum nature-bar"><small>SEP 17</small><span class="n">6</span></div>
+      <div class="head"><h2>Full-day hike: Nanga Parbat Base Camp</h2><span class="tag nature">Nature</span></div>
+    </div>
+    <div class="body">
+      <div class="hike"><b>🥾 The big one:</b> Fairy Meadows → <b>Beyal Camp</b> → the <b>Nanga Parbat Base Camp viewpoint</b>. Roughly <b>16–18 km, 6–8 hrs</b>, gentle-to-moderate, ending almost beneath the 8,126 m Rakhiot Face. Local guide recommended; turn back at Beyal for a ~4 hr day.</div>
+      <div class="meta"><span class="chip">⏱ 6–8 hrs · moderate</span><span class="chip">🏡 2nd night at Fairy Meadows</span></div>
+    </div>
+  </div>
+
+  <!-- DAY 7 -->
+  <div class="day">
+    <div class="gallery">
+      <img alt="Shigar Valley, near Skardu" referrerpolicy="no-referrer" loading="lazy" onerror="this.style.display='none'" src="https://commons.wikimedia.org/wiki/Special:FilePath/Shigar_Valley%2CSkardu%2CPakistan.jpg?width=1000">
+      <img alt="Nanga Parbat reflected, leaving Fairy Meadows" referrerpolicy="no-referrer" loading="lazy" onerror="this.style.display='none'" src="https://commons.wikimedia.org/wiki/Special:FilePath/Nanga_Parbat_from_reflection_lake%2C_fairy_meadows.jpg?width=1000">
+    </div>
+    <div class="top">
+      <div class="daynum travel-bar"><small>SEP 18</small><span class="n">7</span></div>
+      <div class="head"><h2>Fairy Meadows → Skardu</h2><span class="tag travel">Transit</span><span class="tag nature">Scenery</span></div>
+    </div>
+    <div class="body">
+      <p>Descend to the jeeps, then a stunning drive east along the <b>Indus</b> through a canyon of colossal mountains into <b>Baltistan</b> (~5–6 hrs).</p>
+      <div class="meta"><span class="chip">🚗 Great driving day along the Indus</span><span class="chip">🛏 Stay: <b>Skardu</b> (4 nights)</span></div>
+    </div>
+  </div>
+
+  <!-- DAY 8 -->
+  <div class="day">
+    <div class="gallery">
+      <img alt="Shangrila Resort, Lower Kachura Lake" referrerpolicy="no-referrer" loading="lazy" onerror="this.style.display='none'" src="https://commons.wikimedia.org/wiki/Special:FilePath/Shangrila_Resort%2C_Lower_Kachura_Lake%2C_Pakistan.jpg?width=1000">
+      <img alt="Lower Kachura Lake, Skardu" referrerpolicy="no-referrer" loading="lazy" onerror="this.style.display='none'" src="https://commons.wikimedia.org/wiki/Special:FilePath/Magnificient_view_of_Shangrila_Resort_Skardu_on_Lower_Kachura_Lake.jpg?width=1000">
+      <img alt="Manthal Buddha Rock, Skardu" referrerpolicy="no-referrer" loading="lazy" onerror="this.style.display='none'" src="https://commons.wikimedia.org/wiki/Special:FilePath/Manthal_Buddha_Rock_-_Skardu.jpg?width=1000">
+    </div>
+    <div class="top">
+      <div class="daynum nature-bar"><small>SEP 19</small><span class="n">8</span></div>
+      <div class="head"><h2>Skardu — lakes &amp; ancient rock</h2><span class="tag nature">Nature</span><span class="tag city">Culture</span></div>
+    </div>
+    <div class="body">
+      <ul>
+        <li><b>Lower Kachura (Shangrila) Lake</b> &amp; the quieter <b>Upper Kachura</b>.</li>
+        <li>The 8th-century <b>Manthal Buddha Rock</b>, restored <b>Shigar Fort</b>, and <b>Kharpocho Fort</b> above town.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- DAY 9 -->
+  <div class="day opt">
+    <div class="gallery">
+      <img alt="Khaplu Palace, Baltistan" referrerpolicy="no-referrer" loading="lazy" onerror="this.style.display='none'" src="https://commons.wikimedia.org/wiki/Special:FilePath/Khaplu_Palace_Skardu%2C_Gilgit_Baltistan%2C_Pakistan.jpg?width=1000">
+      <img alt="Chaqchan Mosque, Khaplu" referrerpolicy="no-referrer" loading="lazy" onerror="this.style.display='none'" src="https://commons.wikimedia.org/wiki/Special:FilePath/Chaqchan_Mosque_Khaplu_Baltistan.jpg?width=1000">
+    </div>
+    <div class="top">
+      <div class="daynum city-bar"><small>SEP 20</small><span class="n">9</span></div>
+      <div class="head"><h2>Khaplu Valley day trip <span class="opt-badge">Optional</span></h2><span class="tag city">Culture</span><span class="tag nature">Scenery</span></div>
+    </div>
+    <div class="body">
+      <p>A gorgeous day east along the Shyok River (~2.5 hrs each way): the restored <b>Khaplu Palace</b>, the 700-year-old wooden <b>Chaqchan Mosque</b>, orchards and Balti villages.</p>
+      <div class="hike"><b>Note:</b> replaces Deosai, which is usually snowed-in by late September. <b>Skippable</b> — drop it and Skardu becomes a relaxed rest day; keep it for one of Baltistan's loveliest side-valleys.</div>
+    </div>
+  </div>
+
+  <!-- DAY 10 -->
+  <div class="day opt">
+    <div class="gallery">
+      <img alt="Katpana cold desert, Skardu" referrerpolicy="no-referrer" loading="lazy" onerror="this.style.display='none'" src="https://commons.wikimedia.org/wiki/Special:FilePath/Cold_Desert_Skardu_Gilgit_Baltistan_Pakistan.jpg?width=1000">
+      <img alt="Katpana dunes, Skardu" referrerpolicy="no-referrer" loading="lazy" onerror="this.style.display='none'" src="https://commons.wikimedia.org/wiki/Special:FilePath/Katpana_Desert_at_Skardu_%28Cold_Desert%29.jpg?width=1000">
+    </div>
+    <div class="top">
+      <div class="daynum nature-bar"><small>SEP 21</small><span class="n">10</span></div>
+      <div class="head"><h2>Skardu — desert &amp; buffer day <span class="opt-badge">Optional</span></h2><span class="tag nature">Nature</span></div>
+    </div>
+    <div class="body">
+      <p>An easy day and a deliberate <b>buffer</b> before flying out. The high-altitude <b>Katpana / Sarfaranga Cold Desert</b> dunes at sunset are magical, or just slow down after the mountains.</p>
+      <div class="hike" style="background:#fffdf7;border-left-color:#d98a00"><b>If you trim:</b> cutting both amber days gives a tight <b>10-day core</b> that flies Skardu→Lahore on Sep 21 instead. But keeping <b>at least this buffer</b> is wise insurance for the mountain flight — the desert sunset is the skippable part, not the spare day itself.</div>
+      <div class="meta"><span class="chip">🛡 Buffer before the flight</span><span class="chip">🏜 Cold-desert sunset</span></div>
+    </div>
+  </div>
+
+  <!-- DAY 11 -->
+  <div class="day">
+    <div class="gallery">
+      <img alt="Badshahi Mosque, Lahore" referrerpolicy="no-referrer" loading="lazy" onerror="this.style.display='none'" src="https://commons.wikimedia.org/wiki/Special:FilePath/Badshahi_Mosque_Lahore_2014.JPG?width=1000">
+      <img alt="Lahore Fort" referrerpolicy="no-referrer" loading="lazy" onerror="this.style.display='none'" src="https://commons.wikimedia.org/wiki/Special:FilePath/View_of_lahore_fort_from_badshahi_majid.JPG?width=1000">
+    </div>
+    <div class="top">
+      <div class="daynum travel-bar"><small>SEP 22</small><span class="n">11</span></div>
+      <div class="head"><h2>Direct flight: Skardu → Lahore</h2><span class="tag travel">Flight</span><span class="tag city">City</span></div>
+    </div>
+    <div class="body">
+      <p>The one you found — <b>PIA PK-454, nonstop Skardu → Lahore</b> (dep 12:20, arr 13:35). Straight from the Karakoram to the Mughal capital in 75 minutes.</p>
+      <ul><li>Afternoon &amp; evening in Lahore: dinner on <b>Fort Road Food Street</b>, rooftops framing the floodlit <b>Badshahi Mosque</b>.</li></ul>
+      <div class="meta"><span class="chip">✈️ Direct, ~€95 · 1 h 15 m</span><span class="chip">🛏 Stay: <b>Lahore</b></span></div>
+    </div>
+  </div>
+
+  <!-- DAY 12 -->
+  <div class="day">
+    <div class="gallery">
+      <img alt="Wazir Khan Mosque, Lahore" referrerpolicy="no-referrer" loading="lazy" onerror="this.style.display='none'" src="https://commons.wikimedia.org/wiki/Special:FilePath/Dawn_at_Wazir_Khan_Mosque.JPG?width=1000">
+      <img alt="Badshahi Mosque, Lahore" referrerpolicy="no-referrer" loading="lazy" onerror="this.style.display='none'" src="https://commons.wikimedia.org/wiki/Special:FilePath/Badshahi_Mosque_Lahore_2014.JPG?width=1000">
+    </div>
+    <div class="top">
+      <div class="daynum city-bar"><small>SEP 23</small><span class="n">12</span></div>
+      <div class="head"><h2>Lahore finale · fly home</h2><span class="tag city">City</span></div>
+    </div>
+    <div class="body">
+      <p>A grand cultural send-off before your evening flight: <b>Badshahi Mosque</b> &amp; <b>Lahore Fort</b>, the dazzling <b>Wazir Khan Mosque</b>, and the <b>Walled City</b> lanes — with last plates of Lahori food.</p>
+      <div class="meta"><span class="chip">✈️ Both fly home: LHE → LIS, evening (via Abu Dhabi)</span></div>
+    </div>
+  </div>
+
+  <!-- FLIGHTS -->
+  <h2 class="section">✈️ Flights</h2>
+  <div class="cards">
+    <div class="opcard">
+      <h4>International — open-jaw</h4>
+      <p><b>Etihad, 1 stop via Abu Dhabi</b>, from <b>€749 per person</b>. Staggered outbound: <b>Sara LIS → ISB (9 Sep)</b>, <b>Antonio LIS → ISB (12 Sep)</b>. Both back together: <b>LHE → LIS (23 Sep)</b>.</p>
+    </div>
+    <div class="opcard">
+      <h4>Internal — two hops</h4>
+      <p><b>ISB → Gilgit</b> (~€65, Sep 13) in, and the star: <b>PIA PK-454, Skardu → Lahore nonstop</b> (~PKR 29,900 ≈ <b>€95</b>, Sep 22) out. ≈ <b>€160 per person</b> total. The direct Skardu→Lahore is what makes the reliable, no-connection finish possible.</p>
+    </div>
+  </div>
+  <p class="costnote">Flights total ≈ <b>€909 per person</b> (€749 international + €160 internal). Fares are only weeks out and non-refundable — worth locking in.</p>
+
+  <!-- BUDGET -->
+  <h2 class="section">💰 What it costs</h2>
+  <p>Estimates <b>per person, in euros</b>, assuming <b>two sharing</b> a car and a room over the 12 days, at roughly <b>PKR 300 = €1</b>. You travel <b>budget on accommodation</b>, so the rooms below reflect guesthouses &amp; hostels. International airfare is shown separately above.</p>
+  <table class="costtable">
+    <tr><th>Item</th><th>Per person</th><th>Notes</th></tr>
+    <tr><td><b>Internal flights</b> (2 hops)</td><td class="amt">≈ €160</td><td>ISB→Gilgit in; direct Skardu→Lahore out. No long overland drive.</td></tr>
+    <tr><td><b>Private car + driver</b> (4×4, fuel incl.)</td><td class="amt">€330–460</td><td>~€75–100/day for a 4×4 + driver over ~8 driving days, <b>split between two</b>. Driver's meals/lodging usually included; tip ~€5–9/day. Sharing jeeps &amp; public buses instead would cut this a lot.</td></tr>
+    <tr><td><b>Accommodation — budget</b> (~11 nights)</td><td class="amt">€90–170</td><td>Guesthouses &amp; hostels: simple twin/double rooms ~€10–25; basic Fairy Meadows cabins; a cheap-but-clean guesthouse in Lahore.</td></tr>
+    <tr><td><b>Food</b></td><td class="amt">€110–200</td><td>Local food is cheap — ~€8–15/day at dhabas &amp; guesthouse kitchens.</td></tr>
+    <tr><td><b>Fairy Meadows</b> — jeep + porter/guide</td><td class="amt">€55–95</td><td>Jeep ~€55–65/vehicle round trip (shared), plus a base-camp guide.</td></tr>
+    <tr><td><b>Activities &amp; entries</b></td><td class="amt">€85–150</td><td>Rakaposhi zipline, Attabad boat, forts &amp; museums (Hunza, Skardu, Lahore), tips.</td></tr>
+    <tr><td><b>SIM, permits, misc</b></td><td class="amt">€55–95</td><td>Tourist SIM/eSIM, checkpoint paperwork (operator handles it), incidentals.</td></tr>
+    <tr class="total"><td>On-the-ground total, per person</td><td class="amt">≈ €890–1,330</td><td>Plus flights (~€909 pp). For two, roughly <b>€1,780–2,660</b> on the ground.</td></tr>
+  </table>
+  <p class="costnote"><b>All-in per person</b> (flights + ground) ≈ <b>€1,800–2,240</b>. With budget rooms, the <b>car &amp; driver is now your biggest ground cost</b> — swapping it for shared jeeps and public buses could push the ground total below ~€700 pp if you want to go leaner still.</p>
+  <p class="costnote"><b>Sara's head-start (Sep 9–11):</b> add ~3 extra budget nights in Islamabad (≈ <b>€30–75</b>), plus the <b>Urdu course</b> (a private tutor runs ~€5–10/hr; NUML's short course is cheaper still) and a day-trip or two (entries + shared transport ≈ €10–30/day). Reckon on <b>€80–180 extra</b> for those three solo days.</p>
+
+  <!-- TOURS -->
+  <h2 class="section">🧭 Prefer to join a guided tour?</h2>
+  <p>Gilgit-Baltistan operators run scheduled and private trips over this exact circuit (driver, jeeps, permits and hotels bundled). Compare a few — always read recent reviews before paying a deposit:</p>
+  <div class="cards">
+    <div class="opcard"><h4>Apricot Tours</h4><p>Long-established GB operator; group &amp; private northern tours. <a href="https://www.apricottours.pk/" target="_blank" rel="noopener">apricottours.pk</a></p></div>
+    <div class="opcard"><h4>Nature Adventure Club</h4><p>Budget-to-mid group departures. <a href="https://www.natureadventureclub.pk/" target="_blank" rel="noopener">natureadventureclub.pk</a></p></div>
+    <div class="opcard"><h4>See Pakistan Tours / Tripmaker</h4><p>Northern packages, air or road. <a href="https://seepakistantours.com/" target="_blank" rel="noopener">seepakistantours.com</a></p></div>
+  </div>
+
+  <!-- URDU -->
+  <h2 class="section">🗣️ Learn some Urdu in Islamabad</h2>
+  <div class="tips">
+    <h4>NUML — the obvious choice</h4>
+    <p>The <b>National University of Modern Languages (NUML)</b>, Islamabad runs <b>Urdu courses for foreigners</b> — short &amp; online proficiency courses (an 8-week short course runs afternoons, ~3 hrs/day). Great to start online before you fly. <a href="https://numl.edu.pk/olc" target="_blank" rel="noopener">numl.edu.pk/olc</a></p>
+    <h4>Private tutors &amp; apps</h4>
+    <p>For a short trip a <b>private tutor</b> is most flexible — find them on <a href="https://www.teacheron.com/urdu_to_foreigners-tutors" target="_blank" rel="noopener">TeacherOn</a>, or use <b>italki</b>/<b>Preply</b> online. Even a few phrases — <em>as-salamu alaikum</em>, <em>shukriya</em>, <em>kitne ka hai?</em> — go a long way.</p>
+  </div>
+
+  <h2 class="section">⚠️ Safety &amp; season</h2>
+  <div class="safety">
+    <h4>Mid-September timing &amp; the flights</h4>
+    <p>Lovely timing — Hunza's golden autumn is beginning. The flaky mountain flight (<b>Gilgit-in</b>) sits at the <b>start</b>, where a cancellation just means driving up. The <b>exit</b> is the reliable direct <b>Skardu→Lahore</b>, with a Skardu <b>buffer day (Day 10)</b> in front of it — so nothing threatens your Sep 23 flight home.</p>
+    <p>Pakistan carries an overall <b>US "Level 3 – Reconsider Travel"</b> advisory; <b>Gilgit-Baltistan is among the more tourist-friendly regions</b>, and Islamabad &amp; Lahore are the lower-risk zones. Use a reputable driver-guide, travel by day, and check <b>your own government's advisory</b> and insurance before booking.</p>
+    <p><b>Altitude:</b> Khunjerab (~4,700 m) and the base-camp hike (~3,500–4,000 m) — nothing technical, but ascend gradually and hydrate. Modest dress for Lahore's mosques.</p>
+  </div>
+
+  <h2 class="section">Practical notes</h2>
+  <div class="tips">
+    <h4>🚙 Fly the dull legs, drive the beautiful ones</h4>
+    <p>A hired <b>4×4 with driver</b> covers the scenic overland stretches (Hunza gorges, the Indus into Baltistan, up to Fairy Meadows). The two short flights skip the long, unremarkable hauls in and out.</p>
+    <h4>✈️ Keep Day 2 flexible; hold the Skardu buffer</h4>
+    <p>If the Gilgit flight is scrubbed on Day 2, start driving up instead (long, but it's early in the trip). Don't give up the Day 10 Skardu buffer — it's your insurance for the direct Lahore flight.</p>
+    <h4>🎒 Packing</h4>
+    <p>Layers for big day–night swings, a warm jacket even in September, proper hiking shoes for the base-camp day, sun protection, a power bank, and cash — ATMs thin out beyond Gilgit and Skardu.</p>
+  </div>
+
+  <footer>
+    Northern Pakistan · Sara 9–23 Sep · Antonio 12–23 Sep · 12-day joint loop (Sep 12–23) · fly up to Gilgit, sweep east to Skardu, direct flight to Lahore · Etihad open-jaw LIS–ISB / LHE–LIS.<br>
+    Photos via Wikimedia Commons; map © OpenStreetMap contributors. Costs &amp; conditions are estimates — verify before booking.
+  </footer>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script>
+  (function(){
+    var map = L.map('route-map', {scrollWheelZoom:false}).setView([34.8, 74.6], 6);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {maxZoom:17, attribution:'© OpenStreetMap'}).addTo(map);
+
+    var ISB=[33.6844,73.0479], LHE=[31.5497,74.3436], SKD=[35.2971,75.6333],
+        KHA=[35.1600,76.3200], FM=[35.3905,74.5772], GIL=[35.9208,74.3080],
+        RAK=[36.1600,74.5200], HUN=[36.3167,74.6667], PAS=[36.4667,74.8667];
+
+    function bearing(a,b){var φ1=a[0]*Math.PI/180,φ2=b[0]*Math.PI/180,Δλ=(b[1]-a[1])*Math.PI/180;
+      var y=Math.sin(Δλ)*Math.cos(φ2), x=Math.cos(φ1)*Math.sin(φ2)-Math.sin(φ1)*Math.cos(φ2)*Math.cos(Δλ);
+      return Math.atan2(y,x)*180/Math.PI;}
+    function mid(a,b){return [(a[0]+b[0])/2,(a[1]+b[1])/2];}
+    function arrows(pts,color){
+      for(var i=0;i<pts.length-1;i++){
+        var m=mid(pts[i],pts[i+1]), b=bearing(pts[i],pts[i+1]);
+        L.marker(m,{interactive:false,keyboard:false,icon:L.divIcon({className:'',iconSize:[18,18],iconAnchor:[9,9],
+          html:'<div style="transform:rotate('+b+'deg);color:'+color+';font-size:15px;line-height:18px;font-weight:900;text-shadow:0 0 2px #fff">▲</div>'})}).addTo(map);
+      }
+    }
+
+    // ---- flight legs (dashed blue): ISB->Gilgit in, Skardu->Lahore out ----
+    var flights = [ [ISB,GIL], [SKD,LHE] ];
+    flights.forEach(function(seg){
+      L.polyline(seg, {color:'#2f6bd6', weight:3.5, opacity:.85, dashArray:'9,9'}).addTo(map);
+      arrows(seg,'#2f6bd6');
+      L.marker(mid(seg[0],seg[1]),{interactive:false,keyboard:false,icon:L.divIcon({className:'',iconSize:[22,22],iconAnchor:[11,11],
+        html:'<span style="font-size:19px;filter:drop-shadow(0 1px 2px rgba(0,0,0,.35))">✈️</span>'})}).addTo(map);
+    });
+
+    // ---- driving route (solid green): Gilgit -> Hunza -> Fairy Meadows -> Skardu -> Khaplu ----
+    var drive = [ GIL, RAK, HUN, PAS, HUN, GIL, FM, SKD, KHA, SKD ];
+    L.polyline(drive, {color:'#0f5132', weight:4, opacity:.8}).addTo(map);
+    arrows(drive,'#0f5132');
+
+    // ---- markers ----
+    var colors = {stay:'#c0392b', stop:'#1f6f43', thrill:'#e08a1e', hub:'#4f6b86'};
+    var stops = [
+      {c:ISB, t:'hub', d:'1', name:'Islamabad', note:'Sara from Sep 9 (Urdu head-start); Antonio arrives Sep 12. Fly up to Gilgit next morning.'},
+      {c:GIL, t:'stop', d:'2', name:'Gilgit', note:'Fly in, then drive up to Hunza (Rakaposhi zipline en route).'},
+      {c:RAK, t:'thrill', d:'2', name:'Rakaposhi Viewpoint', note:'Ice-wall views &amp; the Rakaposhi zipline.'},
+      {c:HUN, t:'stay', d:'2–4', name:'Karimabad, Hunza', note:'Baltit &amp; Altit forts, Eagle’s Nest; Attabad, Passu, Khunjerab. 3 nights.'},
+      {c:PAS, t:'stop', d:'4', name:'Upper Hunza (Passu)', note:'Attabad Lake, Passu Cones, Hussaini Bridge, Khunjerab Pass.'},
+      {c:FM, t:'stay', d:'5–6', name:'Fairy Meadows', note:'Jeep + hike; full-day base-camp hike to Beyal / Nanga Parbat. 2 nights.'},
+      {c:SKD, t:'stay', d:'7–10', name:'Skardu', note:'Kachura lakes, Manthal Buddha, Katpana desert. Buffer day, then fly out. 4 nights.'},
+      {c:KHA, t:'stop', d:'9', name:'Khaplu Valley', note:'Khaplu Palace &amp; Chaqchan Mosque (autumn swap for Deosai).'},
+      {c:LHE, t:'stay', d:'11–12', name:'Lahore', note:'Direct flight from Skardu. Badshahi Mosque, Lahore Fort, Wazir Khan — then home.'}
+    ];
+    stops.forEach(function(s){
+      L.circleMarker(s.c, {radius:9, color:'#fff', weight:2, fillColor:colors[s.t], fillOpacity:1})
+        .addTo(map).bindPopup('<b>Day '+s.d+' · '+s.name+'</b><br>'+s.note);
+    });
+
+    map.fitBounds(L.latLngBounds([ISB,LHE,SKD,KHA,PAS,HUN,FM,GIL]).pad(0.12));
+    setTimeout(function(){ map.invalidateSize(); }, 300);
+  })();
+</script>
+</body>
+</html>

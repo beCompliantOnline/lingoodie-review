@@ -92,7 +92,22 @@
   .pre .badge2{flex:none;min-width:96px;padding:10px 12px;border-radius:12px;background:#2b8a8a;color:#fff;text-align:center;font-weight:800;line-height:1.15;margin-top:-40px;border:3px solid #fff;box-shadow:0 3px 8px rgba(0,0,0,.2)}
   .pre .badge2 small{display:block;font-size:9px;letter-spacing:.06em;opacity:.9}
   .pre .body{padding:4px 22px 22px}
-  @media(max-width:560px){.gallery{height:180px}}
+  .tablewrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  @media(max-width:560px){
+    .gallery{height:180px}
+    header.hero{padding:46px 16px}
+    .wrap{padding:0 14px 60px}
+    #route-map{height:340px}
+    .day .top,.pre .top{gap:12px;padding:16px 15px 6px}
+    .day .body,.pre .body{padding:4px 15px 18px}
+    .daynum{width:50px;height:50px;margin-top:-42px}
+    .daynum .n{font-size:20px}
+    .callout{gap:10px}
+    .callout .col,.opcard{min-width:100%}
+    .costtable th,.costtable td{padding:8px 10px;font-size:13px}
+    h2.section{font-size:20px}
+    .pre .badge2,.badge2{min-width:78px;font-size:13px}
+  }
 </style>
 </head>
 <body>
@@ -383,6 +398,7 @@
   <!-- BUDGET -->
   <h2 class="section">💰 What it costs</h2>
   <p>Estimates <b>per person, in euros</b>, assuming <b>three sharing</b> a car (and rooms) over the 11 days, at roughly <b>PKR 300 = €1</b>. You travel <b>budget on accommodation</b>, so the rooms below reflect guesthouses &amp; hostels. International airfare is shown separately above.</p>
+  <div class="tablewrap">
   <table class="costtable">
     <tr><th>Item</th><th>Per person</th><th>Notes</th></tr>
     <tr><td><b>Internal flights</b> (2 hops)</td><td class="amt">≈ €160</td><td>ISB→Gilgit in; direct Skardu→Lahore out. No long overland drive.</td></tr>
@@ -394,6 +410,7 @@
     <tr><td><b>SIM, permits, misc</b></td><td class="amt">€55–95</td><td>Tourist SIM/eSIM, checkpoint paperwork (operator handles it), incidentals.</td></tr>
     <tr class="total"><td>On-the-ground total, per person</td><td class="amt">≈ €760–1,170</td><td>Plus flights (~€909 pp). For all three, roughly <b>€2,280–3,510</b> on the ground.</td></tr>
   </table>
+  </div>
   <p class="costnote"><b>All-in per person</b> (flights + ground) ≈ <b>€1,670–2,080</b>. With budget rooms and the car split three ways, the biggest ground cost is now food + activities — swapping the private car for shared jeeps and public buses could push the ground total lower still.</p>
   <p class="costnote"><b>The Islamabad head-start (Sep 9–12):</b> Sara has a few extra nights, Larisa two, before Antonio arrives (budget rooms ≈ <b>€40–90</b> each), plus the <b>Urdu course</b> (a private tutor runs ~€5–10/hr; NUML's short course is cheaper still) and a day-trip or two (entries + shared transport ≈ €10–30/day). Reckon on <b>€80–200 extra</b> each for those pre-Antonio days.</p>
 

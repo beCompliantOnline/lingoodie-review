@@ -97,6 +97,15 @@
   .pre .badge2{flex:none;min-width:96px;padding:10px 12px;border-radius:12px;background:#2b8a8a;color:#fff;text-align:center;font-weight:800;line-height:1.15;margin-top:0;border:3px solid #fff;box-shadow:0 3px 8px rgba(0,0,0,.2)}
   .pre .badge2 small{display:block;font-size:9px;letter-spacing:.06em;opacity:.9}
   .pre .body{padding:4px 22px 22px}
+  .trektabs{display:flex;gap:8px;margin:14px 0 2px;flex-wrap:wrap}
+  .trektab{cursor:pointer;border:1px solid #cfe6e6;background:#fff;color:#2b6b6b;font-weight:800;font-size:15px;
+    padding:10px 16px;border-radius:11px;text-align:left;line-height:1.15;font-family:inherit;transition:all .12s}
+  .trektab .lead{display:block;font-size:10.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#8aa0a0;margin-bottom:2px}
+  .trektab[aria-selected="true"]{background:#1f6f43;color:#fff;border-color:#1f6f43;box-shadow:0 3px 8px rgba(0,0,0,.15)}
+  .trektab[aria-selected="true"] .lead{color:#cfe8d8}
+  .trekpanel[hidden]{display:none}
+  .panelnote{font-size:13px;color:var(--muted);margin:16px 0 -4px;display:flex;align-items:center;gap:8px}
+  .panelnote b{color:var(--ink)}
   .tablewrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
   @media(max-width:560px){
     .gallery{height:180px}
@@ -126,7 +135,7 @@
     <p>Antonio's Gilgit flight was cancelled (no Gilgit flights until Fri), so he flies to <b>Skardu on Tue Sep 15</b> instead. Sara &amp; Larisa drive down from Gilgit the same morning, and the three of you make <b>Skardu your base</b> for the rest of the trip — easy day trips, a proper <b>4-day camping trek</b>, then the unchanged <b>direct Skardu→Lahore flight</b> home.</p>
     <div class="badges">
       <span class="badge">🏕 Skardu base · day trips ≤ 3 hrs</span>
-      <span class="badge">⛺ Nangma Valley 4-day trek</span>
+      <span class="badge">⛺ Nangma or Deosai · 4-day trek</span>
       <span class="badge">✈️ Skardu → Lahore unchanged</span>
       <span class="badge">🟠 Amber = optional / swappable</span>
     </div>
@@ -153,11 +162,11 @@
     </div>
     <div class="col">
       <h3><span class="dot city"></span> The trek, safely</h3>
-      <p><b>Nangma Valley</b> ("Pakistan's Yosemite") is an <b>easy-to-moderate, non-technical</b> 4-day camping trek to ~4,000 m among granite towers — with a hired guide, porters and tents. Far safer than the Fairy Meadows jeep track. <b>Deosai Plains</b> is the even-gentler alternative (see the trek days).</p>
+      <p>Two options for the 4-day trek: <b>Nangma Valley</b> ("Pakistan's Yosemite") is an <b>easy-to-moderate, non-technical</b> camping trek to ~4,000 m among granite towers, and <b>Deosai Plains</b> is the even-gentler, wildlife-rich plateau. Both far safer than the Fairy Meadows jeep track — tap the tabs below to compare.</p>
     </div>
   </div>
 
-  <p class="route">Route now: <b>Gilgit</b> → (drive) <b>Skardu</b> ⇄ day trips &amp; the <b>Nangma trek</b> ✈ <b>Lahore</b> (direct).</p>
+  <p class="route">Route now: <b>Gilgit</b> → (drive) <b>Skardu</b> ⇄ day trips &amp; the <b>4-day trek</b> ✈ <b>Lahore</b> (direct).</p>
 
   <div id="route-map"></div>
   <div class="maplegend">
@@ -217,17 +226,24 @@
     </div>
   </div>
 
-  <!-- TREK BANNER -->
+  <!-- TREK SECTION: two options, tabbed -->
   <div class="pre" style="border-color:#cfe6e6">
     <div class="top">
       <div class="badge2" style="background:#e08a1e">TREK<small>Sep 17–20</small></div>
       <div class="head">
-        <h2 style="margin:2px 0 6px;font-size:19px">⛺ The 4-day camping trek — Nangma Valley</h2>
-        <p style="margin:6px 0;color:#3a443a;font-size:14px">Easy-to-moderate, non-technical, up to <b>~4,000 m</b> among huge granite towers — "Pakistan's Yosemite." You'll want a <b>local guide, porters and tents</b>; arrange it through your Skardu operator. Nights are near freezing — proper sleeping bags and warm layers.</p>
-        <div class="hike" style="background:#fffdf7;border-left-color:#d98a00"><span class="opt-inline">Alternative</span> <b>Deosai Plains</b> — the gentlest option: the world's 2nd-highest plateau (~4,100 m), ~2–3 hrs from Skardu, camping by <b>Sheosar Lake</b> with genuine <b>brown-bear</b> sightings. More camp-and-roam than a summit trek, and the safest of all. Say the word and I'll swap the trek days to Deosai.</div>
+        <h2 style="margin:2px 0 6px;font-size:19px">⛺ The 4-day camping trek — pick your route</h2>
+        <p style="margin:6px 0;color:#3a443a;font-size:14px">Two great options for the same four days (Sep 17–20). <b>Nangma Valley</b> is the classic granite-tower trek; <b>Deosai Plains</b> is the gentler, higher, camp-and-roam plateau with brown bears. <b>Tap a tab</b> to see each option day-by-day — decide with your Skardu operator once you're there.</p>
+        <div class="trektabs" role="tablist">
+          <button type="button" class="trektab" data-trek="nangma" role="tab" aria-selected="true"><span class="lead">Option A · classic trek</span>⛰ Nangma Valley</button>
+          <button type="button" class="trektab" data-trek="deosai" role="tab" aria-selected="false"><span class="lead">Option B · gentlest &amp; wildlife</span>🐻 Deosai Plains</button>
+        </div>
       </div>
     </div>
   </div>
+
+  <!-- ===== PANEL A: NANGMA ===== -->
+  <div class="trekpanel" data-trek="nangma">
+  <p class="panelnote">⛰ <b>Nangma Valley</b> — easy-to-moderate, non-technical, up to <b>~4,000 m</b> among huge granite towers ("Pakistan's Yosemite"). Guide + porters + tents; nights near freezing.</p>
 
   <!-- DAY 3: SEP 17 trek in -->
   <div class="day">
@@ -298,6 +314,83 @@
       <div class="meta"><span class="chip">🛏 Stay: <b>Skardu</b></span><a class="chip" style="text-decoration:none" href="https://www.google.com/maps/search/?api=1&query=Skardu" target="_blank" rel="noopener">📍 Skardu</a></div>
     </div>
   </div>
+  </div><!-- /PANEL A -->
+
+  <!-- ===== PANEL B: DEOSAI ===== -->
+  <div class="trekpanel" data-trek="deosai" hidden>
+  <p class="panelnote">🐻 <b>Deosai Plains</b> — the gentlest option: the world's 2nd-highest plateau (~4,000–4,100 m), only ~2.5–3 hrs from Skardu, camp-and-roam by <b>Sheosar Lake</b> with real chances of <b>Himalayan brown bears</b>, marmots and golden marshes. Very little climbing — but it's high and cold, so acclimatising on Sep 16 still matters.</p>
+
+  <!-- D-DAY 3: SEP 17 up to the plateau -->
+  <div class="day">
+    <div class="gallery">
+      <img alt="Deosai Plains" referrerpolicy="no-referrer" loading="lazy" onerror="this.style.display='none'" src="https://commons.wikimedia.org/wiki/Special:FilePath/Deosai_National_Park.jpg?width=1000">
+      <img alt="Road up to Deosai" referrerpolicy="no-referrer" loading="lazy" onerror="this.style.display='none'" src="https://commons.wikimedia.org/wiki/Special:FilePath/Deosai_Plains%2C_Pakistan.jpg?width=1000">
+    </div>
+    <div class="top">
+      <div class="daynum travel-bar"><small>SEP 17</small><span class="n">3</span></div>
+      <div class="head"><h2>Trek Day 1 — Skardu → Deosai, camp on the plateau</h2><span class="tag travel">Transit</span><span class="tag nature">Camp</span></div>
+    </div>
+    <div class="body">
+      <div class="wx" data-lat="34.9700" data-lon="75.4200" data-elev="4000" data-date="2026-09-17" data-label="Deosai (Bara Pani)"><div class="wx-live" hidden></div><div class="wx-typ">🌡 <b>Deosai (~4,000 m):</b> big-sky cold — day <b>~10–15°C</b>, night <b>~-4 to 2°C</b>, wind &amp; the odd flurry. 👕 Full warm layers even by day, windproof shell, hat &amp; gloves; a <b>proper cold-rated sleeping bag</b> — nights on the plateau are genuinely freezing.</div></div>
+      <p>Drive up from Skardu past <b>Sadpara Lake</b> and onto the plateau (~2.5–3 hrs by 4×4). Set up camp near <b>Bara Pani</b> or push on toward <b>Sheosar Lake</b>. An easy first day — mostly the drive, then gentle walking to stretch the legs and take in the enormous open space.</p>
+      <div class="hike"><b>🥾 Effort:</b> minimal — this is camp-and-roam, not a climb. The altitude is the only real work, so move slowly and hydrate.</div>
+      <div class="meta"><span class="chip">🏕 Camp: Bara Pani / Sheosar (night 1)</span><a class="chip" style="text-decoration:none" href="https://www.google.com/maps/search/?api=1&query=Sadpara+Lake+Skardu" target="_blank" rel="noopener">📍 Sadpara Lake</a></div>
+    </div>
+  </div>
+
+  <!-- D-DAY 4: SEP 18 Sheosar Lake -->
+  <div class="day">
+    <div class="gallery">
+      <img alt="Sheosar Lake, Deosai" referrerpolicy="no-referrer" loading="lazy" onerror="this.style.display='none'" src="https://commons.wikimedia.org/wiki/Special:FilePath/Sheosar_Lake.jpg?width=1000">
+      <img alt="Sheosar Lake reflections" referrerpolicy="no-referrer" loading="lazy" onerror="this.style.display='none'" src="https://commons.wikimedia.org/wiki/Special:FilePath/Sheosar_Lake%2C_Deosai_National_Park.jpg?width=1000">
+    </div>
+    <div class="top">
+      <div class="daynum nature-bar"><small>SEP 18</small><span class="n">4</span></div>
+      <div class="head"><h2>Trek Day 2 — Sheosar Lake &amp; the golden plains</h2><span class="tag nature">Nature</span></div>
+    </div>
+    <div class="body">
+      <div class="wx" data-lat="34.8167" data-lon="75.3500" data-elev="4100" data-date="2026-09-18" data-label="Sheosar Lake"><div class="wx-live" hidden></div><div class="wx-typ">🌡 <b>Sheosar Lake (~4,100 m):</b> bright &amp; cold — day <b>~9–14°C</b>, night <b>~-5 to 1°C</b>. 👕 Same full warm system, sunhat &amp; strong sunscreen for the fierce high-altitude sun, warm hat for the evening by the lake.</div></div>
+      <p>A full day around the star of Deosai: <b>Sheosar Lake</b>, a mirror-still alpine lake ringed by wildflower meadows (still golden in mid-Sep). Gentle walks along the shore, photography in the clear light, and time to just sit in one of the emptiest, biggest landscapes you'll ever see. Second night camping.</p>
+      <div class="hike"><b>🥾 Effort:</b> easy shoreline &amp; meadow walking, as much or as little as you like.</div>
+      <div class="meta"><span class="chip">🏕 Camp: Sheosar Lake (night 2)</span><a class="chip" style="text-decoration:none" href="https://www.google.com/maps/search/?api=1&query=Sheosar+Lake+Deosai" target="_blank" rel="noopener">📍 Sheosar Lake</a></div>
+    </div>
+  </div>
+
+  <!-- D-DAY 5: SEP 19 wildlife -->
+  <div class="day">
+    <div class="gallery">
+      <img alt="Deosai meadows" referrerpolicy="no-referrer" loading="lazy" onerror="this.style.display='none'" src="https://commons.wikimedia.org/wiki/Special:FilePath/Deosai_Plains%2C_Pakistan.jpg?width=1000">
+      <img alt="Himalayan brown bear" referrerpolicy="no-referrer" loading="lazy" onerror="this.style.display='none'" src="https://commons.wikimedia.org/wiki/Special:FilePath/Ursus_arctos_isabellinus.jpg?width=1000">
+    </div>
+    <div class="top">
+      <div class="daynum nature-bar"><small>SEP 19</small><span class="n">5</span></div>
+      <div class="head"><h2>Trek Day 3 — Bara Pani, marmots &amp; bear country</h2><span class="tag nature">Wildlife</span></div>
+    </div>
+    <div class="body">
+      <div class="wx" data-lat="34.9700" data-lon="75.4200" data-elev="4000" data-date="2026-09-19" data-label="Deosai (Bara Pani)"><div class="wx-live" hidden></div><div class="wx-typ">🌡 <b>Deosai (~4,000 m):</b> <b>~10–15°C</b> by day, below freezing overnight. 👕 Layers you can shed as the sun climbs; keep the windproof and gloves handy — the wind is constant up here.</div></div>
+      <p>Roam the heart of the plateau — <b>Bara Pani</b> and <b>Kala Pani</b> stream crossings, marmot colonies whistling from their burrows, and the genuine (if lucky) chance of spotting the <b>Himalayan brown bear</b> Deosai is protected for. Your guide knows the best sunrise and sunset spots for both wildlife and light. Third night at camp.</p>
+      <div class="hike"><b>🥾 Effort:</b> easy walking between viewpoints; bring binoculars if you have them — the wildlife is why you came.</div>
+      <div class="meta"><span class="chip">🐻 Brown-bear &amp; marmot country</span><span class="chip">🏕 Camp: Bara Pani (night 3)</span></div>
+    </div>
+  </div>
+
+  <!-- D-DAY 6: SEP 20 out -->
+  <div class="day">
+    <div class="gallery">
+      <img alt="Descending from Deosai" referrerpolicy="no-referrer" loading="lazy" onerror="this.style.display='none'" src="https://commons.wikimedia.org/wiki/Special:FilePath/Deosai_National_Park.jpg?width=1000">
+      <img alt="Back to Skardu" referrerpolicy="no-referrer" loading="lazy" onerror="this.style.display='none'" src="https://commons.wikimedia.org/wiki/Special:FilePath/Katpana_Desert_at_Skardu_%28Cold_Desert%29.jpg?width=1000">
+    </div>
+    <div class="top">
+      <div class="daynum travel-bar"><small>SEP 20</small><span class="n">6</span></div>
+      <div class="head"><h2>Trek Day 4 — off the plateau &amp; back to Skardu</h2><span class="tag travel">Transit</span></div>
+    </div>
+    <div class="body">
+      <div class="wx" data-lat="35.2971" data-lon="75.6333" data-elev="2300" data-date="2026-09-20" data-label="Skardu"><div class="wx-live" hidden></div><div class="wx-typ">🌡 <b>Down to Skardu (~2,300 m):</b> warming fast as you drop off the plateau — <b>~20–24°C</b> in town, cool <b>~9–11°C</b> night. 👕 Peel the warm layers as you descend; a hot shower and dry clothes waiting in Skardu feel amazing after the cold nights.</div></div>
+      <p>A last plateau morning, then drive back down past Sadpara to <b>Skardu</b> (~2.5–3 hrs). Hot shower, real bed, a proper meal — and you've still got your buffer day tomorrow.</p>
+      <div class="meta"><span class="chip">🛏 Stay: <b>Skardu</b></span><a class="chip" style="text-decoration:none" href="https://www.google.com/maps/search/?api=1&query=Skardu" target="_blank" rel="noopener">📍 Skardu</a></div>
+    </div>
+  </div>
+  </div><!-- /PANEL B -->
 
   <!-- DAY 7: SEP 21 buffer -->
   <div class="day">
@@ -403,7 +496,7 @@
   </div>
 
   <footer>
-    Northern Pakistan · revised Skardu-based plan · Sara, Larisa &amp; Antonio · reunite Skardu Sep 15 · Nangma Valley 4-day trek Sep 17–20 · direct Skardu→Lahore Sep 22, home Sep 23.<br>
+    Northern Pakistan · revised Skardu-based plan · Sara, Larisa &amp; Antonio · reunite Skardu Sep 15 · 4-day trek (Nangma or Deosai) Sep 17–20 · direct Skardu→Lahore Sep 22, home Sep 23.<br>
     Photos via Wikimedia Commons; map © OpenStreetMap contributors. Costs &amp; conditions are estimates — verify locally.
   </footer>
 </div>
@@ -439,10 +532,10 @@
     var stops = [
       {c:ISB, t:'hub', d:'10', name:'Islamabad', note:'Sara landed Sep 10. Antonio flies ISB→Skardu Sep 15.'},
       {c:GIL, t:'stop', d:'11–15', name:'Gilgit', note:'Sisters based Sep 11–15, then drive to Skardu.'},
-      {c:SKD, t:'stay', d:'15–22', name:'Skardu', note:'Base for the whole second half — day trips + the Nangma trek launch.'},
-      {c:HUS, t:'thrill', d:'17–20', name:'Nangma / Hushe', note:'4-day camping trek via Kanday/Hushe to ~4,000 m granite towers.'},
+      {c:SKD, t:'stay', d:'15–22', name:'Skardu', note:'Base for the whole second half — day trips + the trek launch.'},
+      {c:HUS, t:'thrill', d:'17–20', name:'Nangma / Hushe', note:'Option A: 4-day camping trek via Kanday/Hushe to ~4,000 m granite towers.'},
       {c:KPL, t:'stop', d:'21', name:'Khaplu', note:'Optional day trip — Khaplu Palace &amp; Chaqchan Mosque.'},
-      {c:DEO, t:'stop', d:'alt', name:'Deosai Plains', note:'Alternative gentle trek — Sheosar Lake &amp; brown bears (~4,100 m).'},
+      {c:DEO, t:'thrill', d:'17–20', name:'Deosai Plains', note:'Option B: gentle 4-day trek — Sheosar Lake &amp; brown bears (~4,100 m).'},
       {c:LHE, t:'stay', d:'22–23', name:'Lahore', note:'Airblue direct from Skardu, then home.'}
     ];
     stops.forEach(function(s){
@@ -451,6 +544,19 @@
     });
     map.fitBounds(L.latLngBounds([ISB,LHE,SKD,HUS,GIL,DEO]).pad(0.12));
     setTimeout(function(){ map.invalidateSize(); }, 300);
+  })();
+</script>
+
+<script>
+  (function(){
+    var tabs = [].slice.call(document.querySelectorAll('.trektab'));
+    var panels = [].slice.call(document.querySelectorAll('.trekpanel'));
+    function select(key){
+      tabs.forEach(function(t){ t.setAttribute('aria-selected', t.getAttribute('data-trek')===key ? 'true' : 'false'); });
+      panels.forEach(function(p){ p.hidden = (p.getAttribute('data-trek')!==key); });
+    }
+    tabs.forEach(function(t){ t.addEventListener('click', function(){ select(t.getAttribute('data-trek')); }); });
+    select('nangma');
   })();
 </script>
 
